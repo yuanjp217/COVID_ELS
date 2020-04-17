@@ -137,7 +137,7 @@ detach(CHILD)
 DATA.ELS.T1 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T1_COVID_Curated.csv") 
 DATA.ELS.T2 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T2_COVID_Curated.csv") 
 DATA.ELS.T3 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T3_COVID_Curated.csv")
-DATA.ELS<- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_Severity_Scores.csv")
+DATA.ELS<- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_Severity_Scores.csv") #els sumsevtype and stress sensitivity
 
 
 names(DATA.ELS.T3)
