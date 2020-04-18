@@ -35,9 +35,10 @@ Install_And_Load(c("tidyverse"))
 ## set working directory for Mac and PC
 
 
-box.dir <- "/Users/gifuni/Box" #This will change on local machine
+# box.dir <- "/Users/gifuni/Box" #This will change on local machine
+box.dir<- "/Users/rachelweisenburger/Box/Externally_Shareable_Files" #for Rachel
 data.dir <- "/mooddata_nophi/ELS_RDoC/T-COVID-19/DATA/" 
-results.dir <- #This will change on local machine
+#results.dir <- #This will change on local machine
 
 
 ## ---------------------------------------------------------------------
@@ -45,22 +46,21 @@ results.dir <- #This will change on local machine
 
 data.child.file <- "ELS_COVID_CHILD.csv"
 CHILD.csv <- paste0(box.dir,data.dir,data.child.file )
-CHILD <- read.csv(COVID.child.T1.csv)
+CHILD <- read.csv(CHILD.csv)
 
 ## ---------------------------------------------------------------------
 #Scoring measures
-attach(CHILD)
 
 # SCORING DERS
 #REVERSE CODE #1, #2, #6, #7, #8, #10, #17, #20, #22, #24, #34 THEN SUM ALL
-CHILD$DERS_nonaccept<- covid_ders_c_11 + covid_ders_c_12 + covid_ders_c_21 + covid_ders_c_23 +  covid_ders_c_25 + covid_ders_c_29  
-CHILD$DERS_goals<- covid_ders_c_13 + covid_ders_c_18 + abs(covid_ders_c_20-6) + covid_ders_c_26 + covid_ders_c_33
-CHILD$DERS_impulse<- covid_ders_c_3 + covid_ders_c_14 + covid_ders_c_19 + abs(covid_ders_c_24-6) + covid_ders_c_27 + covid_ders_c_32
-CHILD$DERS_awareness<- abs(covid_ders_c_2-6) + abs(covid_ders_c_6-6) + abs(covid_ders_c_8-6) + abs(covid_ders_c_10-6) + abs(covid_ders_c_17-6) + abs(covid_ders_c_34-6)
-CHILD$DERS_strategies<- covid_ders_c_15 + covid_ders_c_16 + abs(covid_ders_c_22-6) + covid_ders_c_28 + covid_ders_c_30 + covid_ders_c_31 + covid_ders_c_35 + covid_ders_c_36
-CHILD$DERS_clarity<- covid_ders_c_4 + abs(covid_ders_c_1-6) + covid_ders_c_5 + abs(covid_ders_c_7-6) + covid_ders_c_9
+CHILD$DERS_nonaccept<- CHILD$covid_ders_c_11 + CHILD$covid_ders_c_12 + CHILD$covid_ders_c_21 + CHILD$covid_ders_c_23 +  CHILD$covid_ders_c_25 + CHILD$covid_ders_c_29  
+CHILD$DERS_goals<- CHILD$covid_ders_c_13 + CHILD$covid_ders_c_18 + abs(CHILD$covid_ders_c_20-6) + CHILD$covid_ders_c_26 + CHILD$covid_ders_c_33
+CHILD$DERS_impulse<- CHILD$covid_ders_c_3 + CHILD$covid_ders_c_14 + CHILD$covid_ders_c_19 + abs(CHILD$covid_ders_c_24-6) + CHILD$covid_ders_c_27 + CHILD$covid_ders_c_32
+CHILD$DERS_awareness<- abs(CHILD$covid_ders_c_2-6) + abs(CHILD$covid_ders_c_6-6) + abs(CHILD$covid_ders_c_8-6) + abs(CHILD$covid_ders_c_10-6) + abs(CHILD$covid_ders_c_17-6) + abs(CHILD$covid_ders_c_34-6)
+CHILD$DERS_strategies<- CHILD$covid_ders_c_15 + CHILD$covid_ders_c_16 + abs(CHILD$covid_ders_c_22-6) + CHILD$covid_ders_c_28 + CHILD$covid_ders_c_30 + CHILD$covid_ders_c_31 + CHILD$covid_ders_c_35 + CHILD$covid_ders_c_36
+CHILD$DERS_clarity<- CHILD$covid_ders_c_4 + abs(CHILD$covid_ders_c_1-6) + CHILD$covid_ders_c_5 + abs(CHILD$covid_ders_c_7-6) + CHILD$covid_ders_c_9
 
-CHILD$DERS_total<- DERS_nonaccept + DERS_goals + DERS_impulse + DERS_awareness + DERS_strategies + DERS_clarity
+CHILD$DERS_total<- CHILD$DERS_nonaccept + CHILD$DERS_goals + CHILD$DERS_impulse + CHILD$DERS_awareness + CHILD$DERS_strategies + CHILD$DERS_clarity
 
 # SCORING MASC
 #SUM ALL
@@ -134,7 +134,8 @@ detach(CHILD)
 #Importing data
 DATA.ELS.T1 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T1_COVID_Curated.csv") 
 DATA.ELS.T2 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T2_COVID_Curated.csv") 
-DATA.ELS.T3 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T3_COVID_Curated.csv") 
+DATA.ELS.T3 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T3_COVID_Curated.csv")
+DATA.ELS<- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_Severity_Scores.csv") #els sumsevtype and stress sensitivity
 
 
 names(DATA.ELS.T3)
