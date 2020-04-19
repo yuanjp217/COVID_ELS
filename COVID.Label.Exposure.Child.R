@@ -31,18 +31,18 @@ Install_And_Load(c("Hmisc"))
 ## ---------------------------------------------------------------------
 
 ## Import data (COVID data - Child, Parent; ELS - T1, T2, T3)
-source(here::here("Code","COVID.Import.Data.R"))
+#source(here::here("Code","COVID.Import.Data.R"))
 
 ## ---------------------------------------------------------------------
 
 #Setting Labels
 
-label(CHILD$record_id)="Record ID"
-label(CHILD$redcap_event_name)="Event Name"
-label(CHILD$redcap_survey_identifier)="Survey Identifier"
-label(CHILD$background_timestamp)="Survey Timestamp"
-label(CHILD$covid_c_name)="What is your full name?"
-label(CHILD$covid_c_pref_name)="What is your preferred name?"
+#label(CHILD$record_id)="Record ID"
+#label(CHILD$redcap_event_name)="Event Name"
+#label(CHILD$redcap_survey_identifier)="Survey Identifier"
+#label(CHILD$background_timestamp)="Survey Timestamp"
+#label(CHILD$covid_c_name)="What is your full name?"
+#label(CHILD$covid_c_pref_name)="What is your preferred name?"
 label(CHILD$covid_background_a)="How old are you? "
 label(CHILD$covid_background_b1)="What race(s) do you identify as?"
 label(CHILD$covid_background_race)="Do you identify as Hispanic or Latino(a)?   (Mexican, Mexican American, Chicano, Puerto Rican, Cuban, South or Central American or other Spanish culture or origin)"
@@ -225,7 +225,7 @@ label(CHILD$covid_emotions_behaviors_past_2_weeks_complete)="Complete?"
 
 
 #Setting Factors(will create new variable for factors)
-CHILD$redcap_event_name.factor = factor(CHILD$redcap_event_name,levels=c("covid_t1_arm_1","covid_t2_arm_1","covid_t3_arm_1"))
+#CHILD$redcap_event_name.factor = factor(CHILD$redcap_event_name,levels=c("covid_t1_arm_1","covid_t2_arm_1","covid_t3_arm_1"))
 CHILD$covid_background_b1.factor = factor(CHILD$covid_background_b1,levels=c("1","2","3","4","5","6","7"))
 CHILD$covid_background_race.factor = factor(CHILD$covid_background_race,levels=c("1","0"))
 CHILD$covid_background_gender.factor = factor(CHILD$covid_background_gender,levels=c("1","2","3","4","5","6"))
@@ -389,7 +389,7 @@ CHILD$covid_change_c_15___12.factor = factor(CHILD$covid_change_c_15___12,levels
 CHILD$covid_change_c_15___13.factor = factor(CHILD$covid_change_c_15___13,levels=c("0","1"))
 CHILD$covid_emotions_behaviors_past_2_weeks_complete.factor = factor(CHILD$covid_emotions_behaviors_past_2_weeks_complete,levels=c("0","1","2"))
 
-levels(CHILD$redcap_event_name.factor)=c("COVID T1","COVID T2","COVID T3")
+#levels(CHILD$redcap_event_name.factor)=c("COVID T1","COVID T2","COVID T3")
 levels(CHILD$covid_background_b1.factor)=c("American Indian or Alaska Native","Asian","Black or African American","Native Hawaiian or Other Pacific Islander","White","Bi/Multiracial","Other")
 levels(CHILD$covid_background_race.factor)=c("Yes","No")
 levels(CHILD$covid_background_gender.factor)=c("Male","Female","Non-binary/ Other gender","Questioning/ Unsure","Prefer to self describe:","Prefer not to say")

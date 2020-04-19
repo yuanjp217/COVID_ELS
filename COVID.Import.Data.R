@@ -1,6 +1,6 @@
 ## ---------------------------
 ##
-## Script name: Import.code.COVID.R
+## Script name: COVID.Import.Data.R
 ##
 ## Purpose of script: Import the Child COVID data for child and parents
 ##
