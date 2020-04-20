@@ -48,8 +48,6 @@ data.child.file <- "ELS_COVID_CHILD.csv"
 CHILD.csv <- paste0(box.dir,data.dir,data.child.file )
 CHILD <- read.csv(CHILD.csv)
 
-names(CHILD)
-
 ## ---------------------------------------------------------------------
 #Scoring measures
 
@@ -130,8 +128,13 @@ CHILD$RISC_total.TC<- CHILD$covid_cd_risc_1 + CHILD$covid_cd_risc_2 + CHILD$covi
 #SUM ALL
 CHILD$SOCS_total.TC<- CHILD$covid_socs_1 + CHILD$covid_socs_2 + CHILD$covid_socs_3 + CHILD$covid_socs_4 + CHILD$covid_socs_5 + CHILD$covid_socs_6 + CHILD$covid_socs_7
 
+## Incorporating data from earlier time points
 
-# Incorporating data from earlier time points
+#Importing data
+#DATA.ELS.T1 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T1_COVID_Curated.csv") 
+#DATA.ELS.T2 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T2_COVID_Curated.csv") 
+#DATA.ELS.T3 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T3_COVID_Curated.csv")
+#DATA.ELS<- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_Severity_Scores.csv") #els sumsevtype and stress sensitivity
 
 #DATA.ELS.T1 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T1_COVID_Curated.csv")
 DATA.ELS.T1 <- read.csv("/Users/rachelweisenburger/Box/Externally_Shareable_Files/mooddata_nophi/ELS_RDoC/T-COVID-19/DATA/ELS_T1_COVID_Curated.csv") #RW
@@ -153,9 +156,6 @@ CHILD.complete <- CHILD[!is.na(CHILD$covid_background_gender),]
 CHILD.complete$ELS_ID 
 
 CHILD.T3 <- merge(CHILD.complete, DATA.ELS.T3, by = "ELS_ID", all.x = TRUE )
-
-
-
 
 
 
