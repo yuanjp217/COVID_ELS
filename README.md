@@ -30,7 +30,7 @@ Before cloning the directory on your computer, we suggest that you follow the fo
 
    OR
    
-   > git clone <your forked repo>
+   > git clone https://github.com/YourUserName/COVID_ELS.git #Clone your forked repo
 
 4) >mv COVID_ELS Code #Changing the name of the directory
    >mkdir Data
