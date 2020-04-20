@@ -27,7 +27,9 @@ Before cloning the directory on your computer, we suggest that you follow the fo
    > cd /path/to/Rproject
 
 3) > git clone https://github.com/gifuni/COVID_ELS.git
+
    OR
+   
    > git clone <your forked repo>
 
 4) >mv COVID_ELS Code #Changing the name of the directory
