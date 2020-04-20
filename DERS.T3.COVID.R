@@ -48,8 +48,6 @@ data.child.file <- "ELS_COVID_CHILD.csv"
 CHILD.csv <- paste0(box.dir,data.dir,data.child.file )
 CHILD <- read.csv(CHILD.csv)
 
-names(CHILD)
-
 ## ---------------------------------------------------------------------
 #Scoring measures
 
@@ -129,11 +127,11 @@ CHILD$SOCS_total<- covid_socs_1 + covid_socs_2 + covid_socs_3 + covid_socs_4 + c
 
 detach(CHILD)
 
-# Incorporating data from earlier time points
-```{r, include=FALSE}
-#Sum all variables
 
 
+## Incorporating data from earlier time points
+
+#Importing data
 DATA.ELS.T1 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T1_COVID_Curated.csv") 
 DATA.ELS.T2 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T2_COVID_Curated.csv") 
 DATA.ELS.T3 <- read.csv("/Users/anthonygifuni/Dropbox/ELS_COVID/Data/ELS_T3_COVID_Curated.csv")
@@ -153,9 +151,6 @@ CHILD.complete <- CHILD[!is.na(CHILD$covid_background_gender),]
 CHILD.complete$ELS_ID 
 
 CHILD.T3 <- merge(CHILD.complete, DATA.ELS.T3, by = "ELS_ID", all.x = TRUE )
-
-
-
 
 
 

@@ -10,8 +10,7 @@ The raw data and basic scripts are housed on BOX (accessed reserved to the lab).
 
 Everyone involved in either study is invited to download the codes for their own analysis, propose changes and add their own scripts.
 
-Further project coordination info can be found by lab members on the google spreadsheet:
-https://docs.google.com/spreadsheets/d/1qZdQYuEmuwondFsy4_HWclcuO0IJcGfTHXZp2J_Mi8I/edit#gid=0
+Further project coordination info can be found by lab members on the google spreadsheet.
 
 
 ## CRISIS Evaluation
