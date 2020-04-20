@@ -33,7 +33,9 @@ Before cloning the directory on your computer, we suggest that you follow the fo
    > git clone https://github.com/YourUserName/COVID_ELS.git #Clone your forked repo
 
 4) >mv COVID_ELS Code #Changing the name of the directory
+
    >mkdir Data
+   
    >mkdir Results
 
 5) Download data files from BOX to the .../Rproject/Data directory.
