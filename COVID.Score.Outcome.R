@@ -45,7 +45,7 @@ source(here::here("Code","COVID.Label.Exposure.Child.R"))
 # SCORING DERS
 #REVERSE CODE #1, #2, #6, #7, #8, #10, #17, #20, #22, #24, #34 THEN SUM ALL
 
-CHILD$DERS_nonaccept.TC<- CHILD$CHILD$covid_ders_c_11 + CHILD$covid_ders_c_12 + CHILD$covid_ders_c_21 + CHILD$covid_ders_c_23 +  CHILD$covid_ders_c_25 + CHILD$covid_ders_c_29  
+CHILD$DERS_nonaccept.TC<- CHILD$covid_ders_c_11 + CHILD$covid_ders_c_12 + CHILD$covid_ders_c_21 + CHILD$covid_ders_c_23 +  CHILD$covid_ders_c_25 + CHILD$covid_ders_c_29  
 CHILD$DERS_goals.TC<- CHILD$covid_ders_c_13 + CHILD$covid_ders_c_18 + abs(CHILD$covid_ders_c_20-6) + CHILD$covid_ders_c_26 + CHILD$covid_ders_c_33
 CHILD$DERS_impulse.TC<- CHILD$covid_ders_c_3 + CHILD$covid_ders_c_14 + CHILD$covid_ders_c_19 + abs(CHILD$covid_ders_c_24-6) + CHILD$covid_ders_c_27 + CHILD$covid_ders_c_32
 CHILD$DERS_awareness.TC<- abs(CHILD$covid_ders_c_2-6) + abs(CHILD$covid_ders_c_6-6) + abs(CHILD$covid_ders_c_8-6) + abs(CHILD$covid_ders_c_10-6) + abs(CHILD$covid_ders_c_17-6) + abs(CHILD$covid_ders_c_34-6)
