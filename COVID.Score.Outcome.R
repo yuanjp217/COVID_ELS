@@ -76,7 +76,7 @@ CHILD$MASC_inconsistency<- abs(CHILD$covid_masc_2-CHILD$covid_masc_11) + abs(CHI
 
 # SCORING STAI
 #SUM ALL
-CHILD$STAI_total<- CHILD$covid_stai_1 + CHILD$covid_stai_2 + CHILD$covid_stai_3 + CHILD$covid_stai_4 + CHILD$covid_stai_5 + CHILD$covid_stai_6
+CHILD$STAI_total.TC<- CHILD$covid_stai_1 + CHILD$covid_stai_2 + CHILD$covid_stai_3 + CHILD$covid_stai_4 + CHILD$covid_stai_5 + CHILD$covid_stai_6
 
 # SCORING RRS-A
 #TAKE THE MEAN
