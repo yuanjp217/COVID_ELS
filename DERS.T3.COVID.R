@@ -93,7 +93,7 @@ CHILD$RRS_brood.TC<- ((CHILD$covid_rrs_a_c_2 + CHILD$covid_rrs_a_c_5 + CHILD$cov
 
 # SCORING PSS
 #REVERSE CODE #4, #5, #7, AND #8, THEN SUM ALL
-CHILD$PSS_total.TC<- CHILD$covid_pss_c_1 + CHILD$covid_pss_c_2 + CHILD$covid_pss_c_3 + abs(CHILD$covid_pss_c_4-4) + abs(CHILD$covid_pss_c_5-4) + CHILD$covid_pss_c_6 + abs(CHILD$covid_pss_c_7-4) + abs(CHILD$covid_pss_c_8-4)
+CHILD$PSS_total.TC<- CHILD$covid_pss_c_1 + CHILD$covid_pss_c_2 + CHILD$covid_pss_c_3 + abs(CHILD$covid_pss_c_4-4) + abs(CHILD$covid_pss_c_5-4) + CHILD$covid_pss_c_6 + abs(CHILD$covid_pss_c_7-4) + abs(CHILD$covid_pss_c_8-4) + CHILD$covid_pss_c_9 + CHILD$covid_pss_c_10
 
 # SCORING MSPSS
 #TAKE THE MEAN
