@@ -11,33 +11,81 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, libraries}
 library(tidyverse)
-library(here)
+library(corrr)
+library(psych)
 #test code
 ```
 
 ```{r, load data}
 # source("COVID.Import.Data.R")
-df.blood = read.csv(file = "Data/ELS_T3_COVID_Curated.csv")
-df.covid = read.csv(file = "Data/ELS_COVID_CHILD_04.20.2020.csv")
-
+ELS.T3 = read.csv(file = "Data/ELS_T3_COVID_Curated.csv")
+COVID = read.csv(file = "Data/ELS_COVID_CHILD_04.20.2020.csv")
 ```
 
 ```{r, wrangling}
 # set up T3 inflammation data
-df.blood = df.blood %>% 
+df.blood = ELS.T3 %>% 
   drop_na(IL.1b_MFI) %>% 
   select(ELS_ID, Timepoint.T3, Sex, age_s2.T3,
-         contains("tscore"),
-         -contains("RADS"),
-         114:127)
-         
-         
-         
- # select(,one_of("tscore.T3"))
-         
-  
-head(df.blood)
+         #contains("tscore"),
+        # -contains("RADS"),
+         114:127) %>% 
+  mutate(IL.1b_MFI = log(IL.1b_MFI),
+         IL.6_MFI = log(IL.6_MFI),
+         IL.10_MFI = log(IL.10_MFI),
+         TNF.a_MFI = log(TNF.a_MFI))
+# head(df.blood)
 
+# set up Covid timepoint
+df.covid = COVID %>%
+  drop_na(MASC_total.TC) %>%
+  select(ELS_ID, Child_Age.TC,
+         contains("MASC"),
+         starts_with("PSS"))
+# head(df.covid)
+
+# merge df's together
+df.merge = left_join(df.blood, df.covid, "ELS_ID") %>% 
+  drop_na(MASC_total.TC) %>%
+  select(-Timepoint.T3)
+head(df.merge)
+```
+```{r correlations}
+df.corr = df.merge %>% 
+  select(-Child_Age.TC) %>% 
+  select(contains("MFI"),
+         contains("BMI"),
+         contains("TC")) %>% 
+  correlate() %>% 
+  mutate_if(is.numeric, round, 3) 
+
+df.corr
+#write_csv(df.corr, path = "Results/covid_inflammation_corrs.csv", col_names = TRUE)
+
+
+# correlation plot
+p.corr_plot = df.corr %>% 
+  rplot(colors = c("red","blue")) + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+p.corr_plot
+#ggsave("./Results/corr_plot.png", p.corr_plot)
+
+# network plot
+p.network_plot = df.corr %>% 
+  network_plot(min_cor = 0.2,
+               colors = c("red","white", "blue"),
+               repel = TRUE)
+p.network_plot
+#ggsave("./Results/network_plot.png", p.network_plot)
+
+```
+```{r}
+df.corr %>% 
+  select(rowname,
+         contains("TC")) %>% 
+  filter(
+    str_detect(rowname, 'TC', negate = TRUE)) %>% 
+  rename(variable = rowname)
 ```
 
 
