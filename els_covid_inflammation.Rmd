@@ -11,12 +11,33 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, libraries}
 library(tidyverse)
+library(here)
 #test code
 ```
 
 ```{r, load data}
-source("COVID.Import.Data.R")
-# CHILD = child's covid response data
-# ELS.T3 = child's T3 response and blood data
+# source("COVID.Import.Data.R")
+df.blood = read.csv(file = "Data/ELS_T3_COVID_Curated.csv")
+df.covid = read.csv(file = "Data/ELS_COVID_CHILD_04.20.2020.csv")
+
 ```
+
+```{r, wrangling}
+# set up T3 inflammation data
+df.blood = df.blood %>% 
+  drop_na(IL.1b_MFI) %>% 
+  select(ELS_ID, Timepoint.T3, Sex, age_s2.T3,
+         contains("tscore"),
+         -contains("RADS"),
+         114:127)
+         
+         
+         
+ # select(,one_of("tscore.T3"))
+         
+  
+head(df.blood)
+
+```
+
 
