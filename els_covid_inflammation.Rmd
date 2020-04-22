@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, libraries}
 library(tidyverse)
 library(corrr)
+library(corrplot)
 library(psych)
 #test code
 ```
@@ -50,6 +51,7 @@ df.merge = left_join(df.blood, df.covid, "ELS_ID") %>%
   select(-Timepoint.T3)
 head(df.merge)
 ```
+
 ```{r correlations}
 df.corr = df.merge %>% 
   select(-Child_Age.TC) %>% 
@@ -60,12 +62,11 @@ df.corr = df.merge %>%
   mutate_if(is.numeric, round, 3) 
 
 df.corr
-#write_csv(df.corr, path = "Results/covid_inflammation_corrs.csv", col_names = TRUE)
 
 
 # correlation plot
 p.corr_plot = df.corr %>% 
-  rplot(colors = c("red","blue")) + 
+  rplot(colors = c("red","green")) + 
   theme(axis.text.x = element_text(angle = 60, hjust = 1))
 p.corr_plot
 #ggsave("./Results/corr_plot.png", p.corr_plot)
@@ -73,19 +74,51 @@ p.corr_plot
 # network plot
 p.network_plot = df.corr %>% 
   network_plot(min_cor = 0.2,
-               colors = c("red","white", "blue"),
+               colors = c("red","white", "green"),
                repel = TRUE)
 p.network_plot
 #ggsave("./Results/network_plot.png", p.network_plot)
 
 ```
-```{r}
+
+```{r write out dataset, eval = FALSE}
 df.corr %>% 
   select(rowname,
          contains("TC")) %>% 
   filter(
     str_detect(rowname, 'TC', negate = TRUE)) %>% 
-  rename(variable = rowname)
+  rename(variable = rowname) %>% 
+write_csv(path = "Results/covid_inflammation_corrs.csv", col_names = TRUE)
+
 ```
 
+```{r tiffany's code for a pretty corrplot}
+#generating the p-values:
+
+cor.mtest <- function(mat, ...) {
+    mat <- as.matrix(mat)
+    n <- ncol(mat)
+    p.mat<- matrix(NA, n, n)
+    diag(p.mat) <- 0
+    for (i in 1:(n - 1)) {
+        for (j in (i + 1):n) {
+            tmp <- cor.test(mat[, i], mat[, j], ...)
+            p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
+        }
+    }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  p.mat
+}
+# matrix of the p-value of the correlation
+p.mat <- df.corr %>% 
+  select(-rowname) %>% 
+  cor.mtest()
+  
+#head(p.mat[, 1:5]) #this will display first 5 variables
+
+
+#plot the correlation matrix and cross-out those under p<0.05
+par(cex=0.5) #aesthetics - adjust size of correlation est
+corrplot(p.mat,method="number", tl.cex=0.8,tl.srt=70,type="upper", p.mat = p.mat, sig.level = 0.05)  
+```
 
