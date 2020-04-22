@@ -1,0 +1,21 @@
+---
+title: "els_covid_inflammation"
+author: "Justin"
+date: "4/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, libraries}
+library(tidyverse)
+```
+
+```{r, load data}
+source("COVID.Import.Data.R")
+# CHILD = child's covid response data
+# ELS.T3 = child's T3 response and blood data
+```
+
