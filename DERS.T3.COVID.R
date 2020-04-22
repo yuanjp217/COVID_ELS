@@ -79,17 +79,11 @@ CHILD$MASC_sep.TC<- CHILD$covid_masc_4 + CHILD$covid_masc_7 + CHILD$covid_masc_9
 
 CHILD$MASC_total.TC<- CHILD$MASC_phys.TC + CHILD$MASC_harm.TC + CHILD$MASC_social.TC + CHILD$MASC_sep.TC
 
-CHILD$MASC_phys_tscore <- NA
-CHILD$MASC_harm_tscore <- NA
-CHILD$MASC_social_tscore<- NA
-CHILD$MASC_sep_tscore <- NA
-CHILD$MASC_tscore <- NA
-CHILD$MASC_inconsistency <- NA
 CHILD$MASC_inconsistency<- abs(CHILD$covid_masc_2-CHILD$covid_masc_11) + abs(CHILD$covid_masc_3-covid_masc_10)+ abs(covid_masc_8-covid_masc_15) + abs(covid_masc_12-covid_masc_18) + abs(covid_masc_13-covid_masc_36) + abs(covid_masc_14-covid_masc_33) + abs(covid_masc_16-covid_masc_22) + abs(covid_masc_30-covid_masc_34)
 
 # SCORING STAI
-#SUM ALL
-CHILD$STAI_total.TC<- CHILD$covid_stai_1 + CHILD$covid_stai_2 + CHILD$covid_stai_3 + CHILD$covid_stai_4 + CHILD$covid_stai_5 + CHILD$covid_stai_6
+#REVERSE CODE #1, #3, AND #5, THEN SUM ALL
+CHILD$STAI_total.TC<- abs(CHILD$covid_stai_1-5) + CHILD$covid_stai_2 + abs(CHILD$covid_stai_3-5) + CHILD$covid_stai_4 + abs(CHILD$covid_stai_5-5) + CHILD$covid_stai_6
 
 # SCORING RRS-A
 #TAKE THE MEAN
@@ -113,8 +107,8 @@ CHILD$MSPSS_so.TC<- ((CHILD$mspss_1 + CHILD$mspss_2 + CHILD$mspss_5 + CHILD$msps
 CHILD$UCLA_total.TC<- CHILD$covid_ucla_c_1 + CHILD$covid_ucla_c_2 + abs(CHILD$covid_ucla_c_3-5) + CHILD$covid_ucla_c_4 + CHILD$covid_ucla_c_5 + abs(CHILD$covid_ucla_c_6-5) + CHILD$covid_ucla_c_7 + CHILD$covid_ucla_c_8
 
 #SCORING CESD-C
-#SUM ALL
-CHILD$CESDC_total.TC<- CHILD$covid_cesd_c_1 + CHILD$covid_cesd_c_2 + CHILD$covid_cesd_c_3 +CHILD$covid_cesd_c_4 + CHILD$covid_cesd_c_5 + CHILD$covid_cesd_c_6 + CHILD$covid_cesd_c_7 + CHILD$covid_cesd_c_8 + CHILD$covid_cesd_c_9 + CHILD$covid_cesd_c_10 + CHILD$covid_cesd_c_11 + CHILD$covid_cesd_c_12 + CHILD$covid_cesd_c_13 + CHILD$covid_cesd_c_14 + CHILD$covid_cesd_c_15 + CHILD$covid_cesd_c_16 + CHILD$covid_cesd_c_17 + CHILD$covid_cesd_c_18 + CHILD$covid_cesd_c_19 + CHILD$covid_cesd_c_20
+#REVERSE SCORE #4, #8, #12, AND #16 THEN SUM ALL
+CHILD$CESDC_total.TC<- CHILD$covid_cesd_c_1 + CHILD$covid_cesd_c_2 + CHILD$covid_cesd_c_3 + abs(CHILD$covid_cesd_c_4-3) + CHILD$covid_cesd_c_5 + CHILD$covid_cesd_c_6 + CHILD$covid_cesd_c_7 + abs(CHILD$covid_cesd_c_8-3) + CHILD$covid_cesd_c_9 + CHILD$covid_cesd_c_10 + CHILD$covid_cesd_c_11 + abs(CHILD$covid_cesd_c_12-3) + CHILD$covid_cesd_c_13 + CHILD$covid_cesd_c_14 + CHILD$covid_cesd_c_15 + abs(CHILD$covid_cesd_c_16-3) + CHILD$covid_cesd_c_17 + CHILD$covid_cesd_c_18 + CHILD$covid_cesd_c_19 + CHILD$covid_cesd_c_20
 
 # SOCRING FCS
 #SUM ALL
