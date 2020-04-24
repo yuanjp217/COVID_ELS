@@ -29,7 +29,7 @@ Install_And_Load <- function(packages) {
   {library(package_name,character.only=TRUE, quietly = TRUE);}
 }
 
-Install_And_Load(c("here"))
+Install_And_Load(c("here","tidyverse"))
 
 ## ---------------------------------------------------------------------
 #Import data
@@ -44,8 +44,13 @@ ELS_sumsev<- read.csv(here::here("Data","ELS_Severity_Scores.csv"))
 CHILD.TIGER <- read.csv(here::here("Data","TIGER_COVID_Child.csv"))
 TIGER.Amyg <- read.csv(here::here("Data","TIGER_ELS_RSFC_April2020.csv"))
 
+## ---------------------------------------------------------------------
+
+## Create ELS_ID variable in CHILD data.frame
 
 
+CHILD <- CHILD %>%
+  mutate(ELS_ID = as.numeric(substr(record_id,1,3)))
 
 
 
