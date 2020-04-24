@@ -43,14 +43,31 @@ ELS_DEMO<- read.csv(here::here("Data", "ELS_DEMO.csv"))
 ELS_sumsev<- read.csv(here::here("Data","ELS_Severity_Scores.csv"))
 CHILD.TIGER <- read.csv(here::here("Data","TIGER_COVID_Child.csv"))
 TIGER.Amyg <- read.csv(here::here("Data","TIGER_ELS_RSFC_April2020.csv"))
+TIGER.Curated <- read.csv(here::here("Data","TIGER_ELS_GOLDEN_Curated_3.13.2020.csv"))
 
 ## ---------------------------------------------------------------------
 
 ## Create ELS_ID variable in CHILD data.frame
 
-
 CHILD <- CHILD %>%
   mutate(ELS_ID = as.numeric(substr(record_id,1,3)))
+
+## ---------------------------------------------------------------------
+#Remove the non tiger subjects. 
+TIGER.Curated <- TIGER.Curated[grep("-T1",TIGER.Amyg$ID),]
+
+#Create IDs for merging
+TIGER.Curated <- TIGER.Curated %>%
+  mutate(ID = as.numeric(substr(SubjID,1,nchar(as.character(SubjID))-3)))  
+
+## ---------------------------------------------------------------------
+#RS TIGER
+#Remove the non tiger subjects. 
+TIGER.Amyg <- TIGER.Amyg[grep("-T1",TIGER.Amyg$ID),]
+
+# TIGER.Amyg <- TIGER.Amyg.backup
+TIGER.Amyg <- TIGER.Amyg %>%
+  mutate(ID = as.numeric(substr(ID,1,nchar(as.character(ID))-3))) 
 
 
 
