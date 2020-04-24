@@ -35,13 +35,14 @@ Install_And_Load(c("here"))
 #Import data
 
 CHILD <- read.csv(here::here("Data","ELS_COVID_Child.csv"))
-PARENT <- read.csv(here::here("Data","ELS_COVID_CHILD.csv"))
+PARENT <- read.csv(here::here("Data","ELS_COVID_PARENT.csv"))
 ELS.T1 <- read.csv(here::here("Data","ELS_T1_COVID_Curated.csv"))
 ELS.T2 <- read.csv(here::here("Data","ELS_T2_COVID_Curated.csv"))
 ELS.T3 <- read.csv(here::here("Data","ELS_T3_COVID_Curated.csv"))
 ELS_DEMO<- read.csv(here::here("Data", "ELS_DEMO.csv"))
 ELS_sumsev<- read.csv(here::here("Data","ELS_Severity_Scores.csv"))
-
+CHILD.TIGER <- read.csv(here::here("Data","TIGER_COVID_Child.csv"))
+TIGER.Amyg <- read.csv(here::here("Data","TIGER_ELS_RSFC_April2020.csv"))
 
 
 
