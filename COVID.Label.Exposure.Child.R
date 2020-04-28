@@ -222,7 +222,6 @@ label(CHILD$covid_emotions_behaviors_past_2_weeks_complete)="Complete?"
 
 ##Renaming NIH Variables to be more descriptive
 CHILD <- rename(CHILD, 
-                "Date.TC"="background_timestamp",
                 "Subject_ID_Timepoint" = "record_id", 
                 "Child_gender_identity.TC" = "covid_background_gender",
                 "Child_Age.TC" = "covid_background_a",
