@@ -81,7 +81,7 @@ label(CHILD$covid_background_health___12)="Has a health professional ever told y
 label(CHILD$covid_background_health___13)="Has a health professional ever told you that you had any of the following health conditions? (choice=Epilepsy or seizures)"
 label(CHILD$covid_background_health___14)="Has a health professional ever told you that you had any of the following health conditions? (choice=Serious stomach or bowel problems)"
 label(CHILD$covid_background_health___15)="Has a health professional ever told you that you had any of the following health conditions? (choice=Serious acne or skin problems)"
-label(CHILD$covid_background_health___15)="Has a health professional ever told you that you had any of the following health conditions? (choice=Emotion or mental health problems (ex. Depression or Anxiety))"
+label(CHILD$covid_background_health___16)="Has a health professional ever told you that you had any of the following health conditions? (choice=Emotion or mental health problems (ex. Depression or Anxiety))"
 label(CHILD$covid_background_health___17)="Has a health professional ever told you that you had any of the following health conditions? (choice=Problems with alcohol or drugs)"
 label(CHILD$covid_background_health___18)="Has a health professional ever told you that you had any of the following health conditions? (choice=Any recent Traumatic Brain Injury)"
 label(CHILD$covid_background_health___19)="Has a health professional ever told you that you had any of the following health conditions? (choice=Any recent, serious accident (e.g., car accident, bike accident, sports injury, etc.))"
@@ -721,12 +721,6 @@ levels(CHILD$Sport_activities.TC.factor)=c("Unchecked","Checked")
 levels(CHILD$Medical_care.TC.factor)=c("Unchecked","Checked")
 levels(CHILD$Other_support_specify.TC.factor)=c("Unchecked","Checked")
 levels(CHILD$covid_emotions_behaviors_past_2_weeks_complete.factor)=c("Incomplete","Unverified","Complete")
-
-
-
-
-##video game section
-
 
 
 
