@@ -4,7 +4,7 @@
 ##
 ## Purpose of script: Label the Child COVID exposure data 
 ##
-## Author: Dr. Anthony J. Gifuni
+## Authors: Dr. Anthony J. Gifuni & Rachel Weisenburger
 ##
 ## Date Created: 2018-04-18
 ##
@@ -55,7 +55,7 @@ label(CHILD$covid_background_3)="How many people currently live in your home (ex
 label(CHILD$covid_background_4___1)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Biological mother)"
 label(CHILD$covid_background_4___2)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Biological father)"
 label(CHILD$covid_background_4___3)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Stepmother)"
-label(CHILD$covid_background_4___4)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Stepfather)"
+label(CHILD$Home_stepfather.TC)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Stepfather)"
 label(CHILD$covid_background_4___5)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Adoptive/Foster parent(s))"
 label(CHILD$covid_background_4___6)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Sibling(s))"
 label(CHILD$covid_background_4___7)="Please specify your relationship to the people in your home. Please select based on the home you currently spend the most time at. Check all that apply. (choice=Other relative(s))"
@@ -81,7 +81,7 @@ label(CHILD$covid_background_health___12)="Has a health professional ever told y
 label(CHILD$covid_background_health___13)="Has a health professional ever told you that you had any of the following health conditions? (choice=Epilepsy or seizures)"
 label(CHILD$covid_background_health___14)="Has a health professional ever told you that you had any of the following health conditions? (choice=Serious stomach or bowel problems)"
 label(CHILD$covid_background_health___15)="Has a health professional ever told you that you had any of the following health conditions? (choice=Serious acne or skin problems)"
-label(CHILD$covid_background_health___16)="Has a health professional ever told you that you had any of the following health conditions? (choice=Emotion or mental health problems (ex. Depression or Anxiety))"
+label(CHILD$covid_background_health___15)="Has a health professional ever told you that you had any of the following health conditions? (choice=Emotion or mental health problems (ex. Depression or Anxiety))"
 label(CHILD$covid_background_health___17)="Has a health professional ever told you that you had any of the following health conditions? (choice=Problems with alcohol or drugs)"
 label(CHILD$covid_background_health___18)="Has a health professional ever told you that you had any of the following health conditions? (choice=Any recent Traumatic Brain Injury)"
 label(CHILD$covid_background_health___19)="Has a health professional ever told you that you had any of the following health conditions? (choice=Any recent, serious accident (e.g., car accident, bike accident, sports injury, etc.))"
@@ -220,173 +220,343 @@ label(CHILD$covid_change_c_15___12)="Which of the following supports were in pla
 label(CHILD$covid_change_c_15___13)="Which of the following supports were in place for you before the Coronavirus/COVID-19 crisis and have been disrupted over the PAST TWO WEEKS? (choice=Other)"
 label(CHILD$covid_emotions_behaviors_past_2_weeks_complete)="Complete?"
 
+##Renaming NIH Variables to be more descriptive
+CHILD <- rename(CHILD, 
+                "Date.TC"="background_timestamp",
+                "Subject_ID_Timepoint" = "record_id", 
+                "Child_gender_identity.TC" = "covid_background_gender",
+                "Child_Age.TC" = "covid_background_a",
+                "Child_Race.TC" = "covid_background_b1",
+                "Child_Ethnicity.TC" = "covid_background_race",
+                "School_type.TC"="covid_background_1", 
+                "Area_live.TC" = "covid_background_2",
+                "Number_people_home.TC"="covid_background_3",
+                "Home_biomother.TC" = "covid_background_4___1",
+                "Home_biofather.TC" = "covid_background_4___2",
+                "Home_stepmother.TC" = "covid_background_4___3",
+                "Home_stepfather.TC" = "covid_background_4___4",
+                "Home_adopt_parent.TC" = "covid_background_4___5",
+                "Home_sibling.TC" = "covid_background_4___6",
+                "Home_other_relat.TC" = "covid_background_4___7",
+                "Home_nonrelat.TC" = "covid_background_4___8",
+                "Home_roommate.TC" =  "covid_background_4___9",
+                "Home_sig_other.TC" =  "covid_background_4___10",
+                "Home_other.TC"  = "covid_background_4___11",
+                "Home_alone.TC"  = "covid_background_4___12",
+                "Home_other_describe.TC" = "covid_background_4a",
+                "Physical_health_rating.TC"="covid_adol_report_1",
+                "Seasonal_allergies.TC"="covid_background_health___1",
+                "Asthma_lung_problems.TC"="covid_background_health___2",
+                "Heart_problems.TC"="covid_background_health___3",
+                "Kidney_problems.TC"="covid_background_health___4",
+                "Immune_disorder.TC"="covid_background_health___5",
+                "Diabetes.TC"="covid_background_health___6",
+                "Recent_infection.TC"="covid_background_health___7",
+                "Hypertension.TC"="covid_background_health___8",
+                "High_cholesterol.TC"="covid_background_health___9",
+                "Cancer.TC"="covid_background_health___10",
+                "Arthritis.TC"= "covid_background_health___11",
+                "Headaches.TC"="covid_background_health___12",
+                "Epilepsy_seizures.TC"="covid_background_health___13",
+                "Stomach_problems.TC"="covid_background_health___14",
+                "Skin_problems.TC"="covid_background_health___15",
+                "Psych_problems.TC"="covid_background_health___16",
+                "Substance_problems.TC"="covid_background_health___17",
+                "TBI.TC"="covid_background_health___18",
+                "Serious_accident.TC"="covid_background_health___19",
+                "Child_height.TC" = "covid_adol_report_3",
+                "Child_weight.TC" = "covid_adol_report_4", 
+                "Mental_health_rating.TC"="covid_adol_report_5",
+                "Exposed_dx_pos_test.TC"  = "covid_exposure_c_1___1",
+                "Exposed_dx_no_test.TC"  = "covid_exposure_c_1___2",
+                "Exposed_symptoms_no_test.TC"  =  "covid_exposure_c_1___3",
+                "Exposed_no.TC"  =  "covid_exposure_c_1___4",
+                "Covid_child_dx.TC"  =  "covid_exposure_c_2",
+                "Covid_child_fever.TC"  =  "covid_exposure_c_3a___1",
+                "Covid_child_no_fever.TC"  =  "covid_exposure_c_3a___0",
+                "Covid_child_cough.TC"  =  "covid_exposure_c_3b___1",
+                "Covid_child_no_cough.TC"  =  "covid_exposure_c_3b___0",
+                "Covid_child_short_breath.TC"  =  "covid_exposure_c_3c___1",
+                "Covid_child_no_short_breath.TC"  =  "covid_exposure_c_3c___0",
+                "Covid_child_sore_throat.TC"  =  "covid_exposure_c_3d___1",
+                "Covid_child_no_sore_throat.TC"  =  "covid_exposure_c_3d___0",
+                "Covid_child_fatigue.TC"  =  "covid_exposure_c_3e___1",
+                "Covid_child_no_fatigue.TC"  =  "covid_exposure_c_3e___0",
+                "Covid_child_loss_taste_smell.TC"  =  "covid_exposure_c_3f___1",
+                "Covid_child_no_loss_taste_smell.TC"  = "covid_exposure_c_3f___0",
+                "Covid_child_other_symptom.TC"  =  "covid_exposure_c_3h___1",
+                "Covid_child_no_other_symptom.TC"  =  "covid_exposure_c_3h___0",
+                "Covid_child_other_symptom_desc.TC"  = "covid_exposure_c_3g",
+                "Mem_household_covid_dx.TC" = "covid_exposure_c_4___1",
+                "Non_mem_household_covid_dx.TC" = "covid_exposure_c_4___2",
+                "No_fam_covid_dx.TC" = "covid_exposure_c_4___3",
+                "Fam_member_ill.TC"= "covid_exposure_c_6___1",
+                "Fam_member_hospitalized.TC"= "covid_exposure_c_6___2",
+                "Fam_member_selfquar_symp.TC"= "covid_exposure_c_6___3",
+                "Fam_member_selfquar_nosymp.TC"= "covid_exposure_c_6___4",
+                "Fam_member_lost_job.TC"=" covid_exposure_c_6___5",
+                "Fam_member_less_money.TC"= "covid_exposure_c_6___6",
+                "Fam_member_pass_away.TC"= "covid_exposure_c_6___7",
+                "No_fam_member_changes.TC"= "covid_exposure_c_6___8",
+                "Worry_self_infected.TC" ="covid_exposure_c_7",
+                "Worry_fam_infected.TC" ="covid_exposure_c_8",
+                "Self_phys_health_influence.TC" = "covid_exposure_c_9",
+                "Self_mental_health_influence.TC" = "covid_exposure_c_10",
+                "Read_talk_virus.TC" = "covid_exposure_c_11",
+                "Covid_positive_changes.TC"="covid_exposure_c_12",
+                "Covid_positive_changes_desc.TC"="covid_exposure_c_13",
+                "School_building_closed.TC" = "covid_change_c_1a",
+                "Classes_in_person.TC" ="covid_change_1c",
+                "Classes_in_session.TC"= "covid_change_c_1b",
+                "Classes_online.TC" = "covid_change_c_1d", 
+                "Access_to_internet.TC"= "covid_change_c_1e",
+                "Assignments.TC"= "covid_change_c_1f",
+                "Meals_from_school.TC" ="covid_change_c_1g",
+                "Num_contacts_outside_household.TC"= "covid_change_c_3",
+                "Time_going_oustide.TC"= "covid_change_c_4",
+                "Stress_of_restrictions.TC"= "covid_change_c_5",
+                "Contacts_outside_change.TC"= "covid_change_c_6",
+                "Diff_following_contact_rules.TC"= "covid_change_c_7", 
+                "Quality_relations_family_change.TC"= "covid_change_c_8a", 
+                "Stress_relations_family_change.TC"= "covid_change_c_8b", 
+                "Quality_relations_friends_change.TC"= "covid_change_c_9a" ,
+                "Stress_relations_friends_change.TC"= "covid_change_c_9b",
+                "Cancelling_events_difficulty.TC"= "covid_change_c_10" ,
+                "Family_financial_problems.TC"= "covid_change_c_11",
+                "Worry_living_stability.TC"= "covid_change_c_12",
+                "Worry_no_food.TC"= "covid_change_c_13",
+                "Hope_crisis_end.TC"= "covid_change_c_14",
+                "Hours_sleep_3months.TC"= "covid_behav_c_1",
+                "Days_exercise_3months.TC" = "covid_behav_c_2", 
+                "Days_outdoors_3months.TC" = "covid_behav_c_3",
+                "Worried_3months.TC" = "covid_emotion_c_1",
+                "Happy_sad_3months.TC"="covid_emotion_c_2",
+                "Anhedonia_3months.TC"="covid_emotion_c_3",
+                "Relaxed_anxious_3months.TC"="covid_emotion_c_4", 
+                "Fidgety_restless_3months.TC"="covid_emotion_c_5",
+                "Fatigued_tired_3months.TC"="covid_emotion_c_6", 
+                "Concentration_3months.TC"="covid_emotion_c_7", 
+                "Irritability_3months.TC"="covid_emotion_c_8",
+                "Loneliness_3months.TC"="covid_emotion_c_9", 
+                "Neg_thoughts_3monthss.TC"= "covid_emotion_c_10",
+                "Time_watching_TV_3months.TC" = "covid_emotion_c_11",
+                "Time_social_media_3months.TC"= "covid_emotion_c_12",
+                "Time_video_games_3months.TC" = "covid_emotion_c_13", 
+                "Alcohol_3months.TC" = "covid_substance_c_1", 
+                "Vaping_nicotine_3months.TC" = "covid_substance_c_2", 
+                "Cigs_tobacco_3months.TC" = "covid_substance_c_3", 
+                "Cannabis_3months.TC" = "covid_substance_c_4", 
+                "Opiates_heropin_narcs_3months.TC" = "covid_substance_c_5",
+                "MDMA_molly_ecstasy_3months.TC" = "covid_exposure_c_6a", 
+                "Halluc_3months.TC" = "covid_substance_c_5b",
+                "Other_drugs_3months.TC" = "covid_substance_c_6",
+                "Sleep_meds_seds_hypnot_3months.TC" = "covid_substance_c_7",
+                "Hours_sleep_2weeks.TC"="covid_behav_c_4",
+                "Days_exercise_2weeks.TC"="covid_behav_c_5",
+                "Days_outdoors_2weeks.TC"="covid_behav_c_6",
+                "Worried_2weeks.TC"="covid_emotion_c_14",
+                "Happy_sad_2weeks.TC"="covid_emotion_c_15",
+                "Anhedonia_2weeks.TC"="covid_emotion_c_16",
+                "Relaxed_anxious_2weeks.TC"="covid_emotion_c_17",
+                "Fidgety_restless_2weeks.TC"="covid_emotion_c_18",
+                "Fatigued_tired_2weeks.TC"="covid_emotion_c_19",
+                "Concentration_2weeks.TC"="covid_emotion_c_20",
+                "Irritability_2weeks.TC"="covid_emotion_c_21",
+                "Loneliness_2weeks.TC"="covid_emotion_c_22",
+                "Neg_thoughts_2weeks.TC"="covid_emotion_c_23",
+                "Time_watching_TV_2weeks.TC"="covid_emotion_c_24",
+                "Time_social_media_2weeks.TC"="covid_emotion_c_25",
+                "Time_video_games_2weeks.TC"="covid_emotion_c_13_7011eb",
+                "Alcohol_2weeks.TC" = "covid_substance_c_9",
+                "Vaping_nicotine_2weeks.TC" = "covid_substance_c_10",
+                "Cigs_tobacco_2weeks.TC" = "covid_substance_c_11",
+                "Cannabis_2weeks.TC" = "covid_substance_c_13",
+                "Opiates_heropin_narcs_2weeks.TC" = "covid_substance_c_14",
+                "MDMA_molly_ecstasy_2weeks.TC" = "covid_substance_c_14a",
+                "Halluc_2weeks.TC" = "covid_substance_c_14b",
+                "Other_drugs_2weeks.TC" = "covid_substance_c_15",
+                "Sleep_meds_seds_hypnot_2weeks.TC" ="covid_substance_c_8",
+                "Resource_room.TC"="covid_change_c_15___1",
+                "Tutoring.TC"="covid_change_c_15___2",
+                "Mentoring_programs.TC"="covid_change_c_15___3",
+                "After_school_programs.TC"="covid_change_c_15___4",
+                "Volunteer_programs.TC"="covid_change_c_15___5",
+                "Psychotherapy.TC"="covid_change_c_15___6",
+                "Psychiatric_care.TC"="covid_change_c_15___7",
+                "Occup_therapy.TC"="covid_change_c_15___8",
+                "Phys_therapy.TC"="covid_change_c_15___9",
+                "Speech_therapy.TC"="covid_change_c_15___10",
+                "Sport_activities.TC"="covid_change_c_15___11",
+                "Medical_care.TC"="covid_change_c_15___12",
+                "Other_support_specify.TC"="covid_change_c_15___13"
+)
 
 #Setting Units
 
 
 #Setting Factors(will create new variable for factors)
 #CHILD$redcap_event_name.factor = factor(CHILD$redcap_event_name,levels=c("covid_t1_arm_1","covid_t2_arm_1","covid_t3_arm_1"))
-CHILD$covid_background_b1.factor = factor(CHILD$covid_background_b1,levels=c("1","2","3","4","5","6","7"))
-CHILD$covid_background_race.factor = factor(CHILD$covid_background_race,levels=c("1","0"))
-CHILD$covid_background_gender.factor = factor(CHILD$covid_background_gender,levels=c("1","2","3","4","5","6"))
-CHILD$covid_background_1.factor = factor(CHILD$covid_background_1,levels=c("1","2","3","4","5"))
-CHILD$covid_background_2.factor = factor(CHILD$covid_background_2,levels=c("1","2","3","4","5"))
-CHILD$covid_background_4___1.factor = factor(CHILD$covid_background_4___1,levels=c("0","1"))
-CHILD$covid_background_4___2.factor = factor(CHILD$covid_background_4___2,levels=c("0","1"))
-CHILD$covid_background_4___3.factor = factor(CHILD$covid_background_4___3,levels=c("0","1"))
-CHILD$covid_background_4___4.factor = factor(CHILD$covid_background_4___4,levels=c("0","1"))
-CHILD$covid_background_4___5.factor = factor(CHILD$covid_background_4___5,levels=c("0","1"))
-CHILD$covid_background_4___6.factor = factor(CHILD$covid_background_4___6,levels=c("0","1"))
-CHILD$covid_background_4___7.factor = factor(CHILD$covid_background_4___7,levels=c("0","1"))
-CHILD$covid_background_4___8.factor = factor(CHILD$covid_background_4___8,levels=c("0","1"))
-CHILD$covid_background_4___9.factor = factor(CHILD$covid_background_4___9,levels=c("0","1"))
-CHILD$covid_background_4___10.factor = factor(CHILD$covid_background_4___10,levels=c("0","1"))
-CHILD$covid_background_4___11.factor = factor(CHILD$covid_background_4___11,levels=c("0","1"))
-CHILD$covid_background_4___12.factor = factor(CHILD$covid_background_4___12,levels=c("0","1"))
-CHILD$covid_adol_report_1.factor = factor(CHILD$covid_adol_report_1,levels=c("1","2","3","4","5"))
-CHILD$covid_background_health___1.factor = factor(CHILD$covid_background_health___1,levels=c("0","1"))
-CHILD$covid_background_health___2.factor = factor(CHILD$covid_background_health___2,levels=c("0","1"))
-CHILD$covid_background_health___3.factor = factor(CHILD$covid_background_health___3,levels=c("0","1"))
-CHILD$covid_background_health___4.factor = factor(CHILD$covid_background_health___4,levels=c("0","1"))
-CHILD$covid_background_health___5.factor = factor(CHILD$covid_background_health___5,levels=c("0","1"))
-CHILD$covid_background_health___6.factor = factor(CHILD$covid_background_health___6,levels=c("0","1"))
-CHILD$covid_background_health___7.factor = factor(CHILD$covid_background_health___7,levels=c("0","1"))
-CHILD$covid_background_health___8.factor = factor(CHILD$covid_background_health___8,levels=c("0","1"))
-CHILD$covid_background_health___9.factor = factor(CHILD$covid_background_health___9,levels=c("0","1"))
-CHILD$covid_background_health___10.factor = factor(CHILD$covid_background_health___10,levels=c("0","1"))
-CHILD$covid_background_health___11.factor = factor(CHILD$covid_background_health___11,levels=c("0","1"))
-CHILD$covid_background_health___12.factor = factor(CHILD$covid_background_health___12,levels=c("0","1"))
-CHILD$covid_background_health___13.factor = factor(CHILD$covid_background_health___13,levels=c("0","1"))
-CHILD$covid_background_health___14.factor = factor(CHILD$covid_background_health___14,levels=c("0","1"))
-CHILD$covid_background_health___15.factor = factor(CHILD$covid_background_health___15,levels=c("0","1"))
-CHILD$covid_background_health___16.factor = factor(CHILD$covid_background_health___16,levels=c("0","1"))
-CHILD$covid_background_health___17.factor = factor(CHILD$covid_background_health___17,levels=c("0","1"))
-CHILD$covid_background_health___18.factor = factor(CHILD$covid_background_health___18,levels=c("0","1"))
-CHILD$covid_background_health___19.factor = factor(CHILD$covid_background_health___19,levels=c("0","1"))
-CHILD$covid_adol_report_5.factor = factor(CHILD$covid_adol_report_5,levels=c("1","2","3","4","5"))
+CHILD$Child_Race.TC.factor = factor(CHILD$Child_Race.TC,levels=c("1","2","3","4","5","6","7"))
+CHILD$Child_Ethnicity.TC.factor = factor(CHILD$Child_Ethnicity.TC,levels=c("1","0"))
+CHILD$Child_gender_identity.TC.factor = factor(CHILD$Child_gender_identity.TC,levels=c("1","2","3","4","5","6"))
+CHILD$School_type.TC.factor = factor(CHILD$School_type.TC,levels=c("1","2","3","4","5"))
+CHILD$Area_live.TC.factor = factor(CHILD$Area_live.TC,levels=c("1","2","3","4","5"))
+CHILD$Home_biomother.TC.factor = factor(CHILD$Home_biomother.TC,levels=c("0","1"))
+CHILD$Home_biofather.TC.factor = factor(CHILD$Home_biofather.TC,levels=c("0","1"))
+CHILD$Home_stepmother.TC.factor = factor(CHILD$Home_stepmother.TC,levels=c("0","1"))
+CHILD$Home_stepfather.TC.factor = factor(CHILD$Home_stepfather.TC,levels=c("0","1"))
+CHILD$Home_adopt_parent.TC.factor = factor(CHILD$Home_adopt_parent.TC,levels=c("0","1"))
+CHILD$Home_sibling.TC.factor = factor(CHILD$Home_sibling.TC,levels=c("0","1"))
+CHILD$Home_other_relat.TC.factor = factor(CHILD$Home_other_relat.TC,levels=c("0","1"))
+CHILD$Home_nonrelat.TC.factor = factor(CHILD$Home_nonrelat.TC,levels=c("0","1"))
+CHILD$Home_roommate.TC.factor = factor(CHILD$Home_roommate.TC,levels=c("0","1"))
+CHILD$Home_sig_other.TC.factor = factor(CHILD$Home_sig_other.TC,levels=c("0","1"))
+CHILD$Home_other.TC.factor = factor(CHILD$Home_other.TC,levels=c("0","1"))
+CHILD$Home_alone.TC.factor = factor(CHILD$Home_alone.TC,levels=c("0","1"))
+CHILD$Physical_health_rating.TC.factor = factor(CHILD$Physical_health_rating.TC,levels=c("1","2","3","4","5"))
+CHILD$Seasonal_allergies.TC.factor = factor(CHILD$Seasonal_allergies.TC,levels=c("0","1"))
+CHILD$Asthma_lung_problems.TC.factor = factor(CHILD$Asthma_lung_problems.TC,levels=c("0","1"))
+CHILD$Heart_problems.TC.factor = factor(CHILD$Heart_problems.TC,levels=c("0","1"))
+CHILD$Kidney_problems.TC.factor = factor(CHILD$Kidney_problems.TC,levels=c("0","1"))
+CHILD$Immune_disorder.TC.factor = factor(CHILD$Immune_disorder.TC,levels=c("0","1"))
+CHILD$ Diabetes.TC.factor = factor(CHILD$ Diabetes.TC,levels=c("0","1"))
+CHILD$Recent_infection.TC.factor = factor(CHILD$Recent_infection.TC,levels=c("0","1"))
+CHILD$Hypertension.TC.factor = factor(CHILD$Hypertension.TC,levels=c("0","1"))
+CHILD$High_cholesterol.TC.factor = factor(CHILD$High_cholesterol.TC,levels=c("0","1"))
+CHILD$Cancer.TC.factor = factor(CHILD$Cancer.TC,levels=c("0","1"))
+CHILD$Arthritis.TC.factor = factor(CHILD$Arthritis.TC,levels=c("0","1"))
+CHILD$Headaches.TC.factor = factor(CHILD$Headaches.TC,levels=c("0","1"))
+CHILD$Epilepsy_seizures.TC.factor = factor(CHILD$Epilepsy_seizures.TC,levels=c("0","1"))
+CHILD$Stomach_problems.TC.factor = factor(CHILD$Stomach_problems.TC,levels=c("0","1"))
+CHILD$Skin_problems.TC.factor = factor(CHILD$Skin_problems.TC,levels=c("0","1"))
+CHILD$Psych_problems.TC.factor = factor(CHILD$Psych_problems.TC,levels=c("0","1"))
+CHILD$Substance_problems.TC.factor = factor(CHILD$Substance_problems.TC,levels=c("0","1"))
+CHILD$TBI.TC.factor = factor(CHILD$TBI.TC,levels=c("0","1"))
+CHILD$Serious_accident.TC.factor = factor(CHILD$Serious_accident.TC,levels=c("0","1"))
+CHILD$Mental_health_rating.TC.factor = factor(CHILD$Mental_health_rating.TC,levels=c("1","2","3","4","5"))
 CHILD$background_complete.factor = factor(CHILD$background_complete,levels=c("0","1","2"))
-CHILD$covid_exposure_c_1___1.factor = factor(CHILD$covid_exposure_c_1___1,levels=c("0","1"))
-CHILD$covid_exposure_c_1___2.factor = factor(CHILD$covid_exposure_c_1___2,levels=c("0","1"))
-CHILD$covid_exposure_c_1___3.factor = factor(CHILD$covid_exposure_c_1___3,levels=c("0","1"))
-CHILD$covid_exposure_c_1___4.factor = factor(CHILD$covid_exposure_c_1___4,levels=c("0","1"))
-CHILD$covid_exposure_c_2.factor = factor(CHILD$covid_exposure_c_2,levels=c("1","2","3","4"))
-CHILD$covid_exposure_c_3a___1.factor = factor(CHILD$covid_exposure_c_3a___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3a___0.factor = factor(CHILD$covid_exposure_c_3a___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3b___1.factor = factor(CHILD$covid_exposure_c_3b___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3b___0.factor = factor(CHILD$covid_exposure_c_3b___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3c___1.factor = factor(CHILD$covid_exposure_c_3c___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3c___0.factor = factor(CHILD$covid_exposure_c_3c___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3d___1.factor = factor(CHILD$covid_exposure_c_3d___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3d___0.factor = factor(CHILD$covid_exposure_c_3d___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3e___1.factor = factor(CHILD$covid_exposure_c_3e___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3e___0.factor = factor(CHILD$covid_exposure_c_3e___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3f___1.factor = factor(CHILD$covid_exposure_c_3f___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3f___0.factor = factor(CHILD$covid_exposure_c_3f___0,levels=c("0","1"))
-CHILD$covid_exposure_c_3h___1.factor = factor(CHILD$covid_exposure_c_3h___1,levels=c("0","1"))
-CHILD$covid_exposure_c_3h___0.factor = factor(CHILD$covid_exposure_c_3h___0,levels=c("0","1"))
-CHILD$covid_exposure_c_4___1.factor = factor(CHILD$covid_exposure_c_4___1,levels=c("0","1"))
-CHILD$covid_exposure_c_4___2.factor = factor(CHILD$covid_exposure_c_4___2,levels=c("0","1"))
-CHILD$covid_exposure_c_4___3.factor = factor(CHILD$covid_exposure_c_4___3,levels=c("0","1"))
-CHILD$covid_exposure_c_6___1.factor = factor(CHILD$covid_exposure_c_6___1,levels=c("0","1"))
-CHILD$covid_exposure_c_6___2.factor = factor(CHILD$covid_exposure_c_6___2,levels=c("0","1"))
-CHILD$covid_exposure_c_6___3.factor = factor(CHILD$covid_exposure_c_6___3,levels=c("0","1"))
-CHILD$covid_exposure_c_6___4.factor = factor(CHILD$covid_exposure_c_6___4,levels=c("0","1"))
-CHILD$covid_exposure_c_6___5.factor = factor(CHILD$covid_exposure_c_6___5,levels=c("0","1"))
-CHILD$covid_exposure_c_6___6.factor = factor(CHILD$covid_exposure_c_6___6,levels=c("0","1"))
-CHILD$covid_exposure_c_6___7.factor = factor(CHILD$covid_exposure_c_6___7,levels=c("0","1"))
-CHILD$covid_exposure_c_6___8.factor = factor(CHILD$covid_exposure_c_6___8,levels=c("0","1"))
-CHILD$covid_exposure_c_7.factor = factor(CHILD$covid_exposure_c_7,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_8.factor = factor(CHILD$covid_exposure_c_8,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_9.factor = factor(CHILD$covid_exposure_c_9,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_10.factor = factor(CHILD$covid_exposure_c_10,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_11.factor = factor(CHILD$covid_exposure_c_11,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_12.factor = factor(CHILD$covid_exposure_c_12,levels=c("1","2","3"))
+CHILD$Exposed_dx_pos_test.TC.factor = factor(CHILD$Exposed_dx_pos_test.TC,levels=c("0","1"))
+CHILD$Exposed_dx_no_test.TC.factor = factor(CHILD$Exposed_dx_no_test.TC,levels=c("0","1"))
+CHILD$Exposed_symptoms_no_test.TC.factor = factor(CHILD$Exposed_symptoms_no_test.TC,levels=c("0","1"))
+CHILD$Exposed_no.TC.factor = factor(CHILD$Exposed_no.TC,levels=c("0","1"))
+CHILD$Covid_child_dx.TC.factor = factor(CHILD$Covid_child_dx.TC,levels=c("1","2","3","4"))
+CHILD$Covid_child_fever.TC.factor = factor(CHILD$Covid_child_fever.TC,levels=c("0","1"))
+CHILD$Covid_child_no_fever.TC.factor = factor(CHILD$Covid_child_no_fever.TC,levels=c("0","1"))
+CHILD$Covid_child_cough.TC.factor = factor(CHILD$Covid_child_cough.TC,levels=c("0","1"))
+CHILD$Covid_child_no_cough.TC.factor = factor(CHILD$Covid_child_no_cough.TC,levels=c("0","1"))
+CHILD$Covid_child_short_breath.TC.factor = factor(CHILD$Covid_child_short_breath.TC,levels=c("0","1"))
+CHILD$Covid_child_no_short_breath.TC.factor = factor(CHILD$Covid_child_no_short_breath.TC,levels=c("0","1"))
+CHILD$Covid_child_sore_throat.TC.factor = factor(CHILD$Covid_child_sore_throat.TC,levels=c("0","1"))
+CHILD$Covid_child_no_sore_throat.TC.factor = factor(CHILD$Covid_child_no_sore_throat.TC,levels=c("0","1"))
+CHILD$Covid_child_fatigue.TC.factor = factor(CHILD$Covid_child_fatigue.TC,levels=c("0","1"))
+CHILD$Covid_child_no_fatigue.TC.factor = factor(CHILD$Covid_child_no_fatigue.TC,levels=c("0","1"))
+CHILD$Covid_child_loss_taste_smell.TC.factor = factor(CHILD$Covid_child_loss_taste_smell.TC,levels=c("0","1"))
+CHILD$Covid_child_no_loss_taste_smell.TC.factor = factor(CHILD$Covid_child_no_loss_taste_smell.TC,levels=c("0","1"))
+CHILD$Covid_child_other_symptom.TC.factor = factor(CHILD$Covid_child_other_symptom.TC,levels=c("0","1"))
+CHILD$Covid_child_no_other_symptom.TC.factor = factor(CHILD$Covid_child_no_other_symptom.TC,levels=c("0","1"))
+CHILD$Mem_household_covid_dx.TC.factor = factor(CHILD$Mem_household_covid_dx.TC,levels=c("0","1"))
+CHILD$Non_mem_household_covid_dx.TC.factor = factor(CHILD$Non_mem_household_covid_dx.TC,levels=c("0","1"))
+CHILD$No_fam_covid_dx.TC.factor = factor(CHILD$No_fam_covid_dx.TC,levels=c("0","1"))
+CHILD$Fam_member_ill.TC.factor = factor(CHILD$Fam_member_ill.TC,levels=c("0","1"))
+CHILD$Fam_member_hospitalized.TC.factor = factor(CHILD$Fam_member_hospitalized.TC,levels=c("0","1"))
+CHILD$Fam_member_selfquar_symp.TC.factor = factor(CHILD$Fam_member_selfquar_symp.TC,levels=c("0","1"))
+CHILD$Fam_member_selfquar_nosymp.TC.factor = factor(CHILD$Fam_member_selfquar_nosymp.TC,levels=c("0","1"))
+CHILD$Fam_member_lost_job.TC.factor = factor(CHILD$Fam_member_lost_job.TC,levels=c("0","1"))
+CHILD$Fam_member_less_money.TC.factor = factor(CHILD$Fam_member_less_money.TC,levels=c("0","1"))
+CHILD$Fam_member_pass_away.TC.factor = factor(CHILD$Fam_member_pass_away.TC,levels=c("0","1"))
+CHILD$No_fam_member_changes.TC.factor = factor(CHILD$No_fam_member_changes.TC,levels=c("0","1"))
+CHILD$Worry_self_infected.TC.factor = factor(CHILD$Worry_self_infected.TC,levels=c("1","2","3","4","5"))
+CHILD$Worry_fam_infected.TC.factor = factor(CHILD$Worry_fam_infected.TC,levels=c("1","2","3","4","5"))
+CHILD$Self_phys_health_influence.TC.factor = factor(CHILD$Self_phys_health_influence.TC,levels=c("1","2","3","4","5"))
+CHILD$Self_mental_health_influence.TC.factor = factor(CHILD$Self_mental_health_influence.TC,levels=c("1","2","3","4","5"))
+CHILD$Read_talk_virus.TC.factor = factor(CHILD$Read_talk_virus.TC,levels=c("1","2","3","4","5"))
+CHILDCovid_positive_changes.TC.factor = factor(CHILD$Covid_positive_changes.TC,levels=c("1","2","3"))
 CHILD$covid_exposure_complete.factor = factor(CHILD$covid_exposure_complete,levels=c("0","1","2"))
-CHILD$covid_change_c_1a.factor = factor(CHILD$covid_change_c_1a,levels=c("1","0"))
-CHILD$covid_change_1c.factor = factor(CHILD$covid_change_1c,levels=c("1","0"))
-CHILD$covid_change_c_1b.factor = factor(CHILD$covid_change_c_1b,levels=c("1","0"))
-CHILD$covid_change_c_1d.factor = factor(CHILD$covid_change_c_1d,levels=c("1","0"))
-CHILD$covid_change_c_1e.factor = factor(CHILD$covid_change_c_1e,levels=c("1","0"))
-CHILD$covid_change_c_1f.factor = factor(CHILD$covid_change_c_1f,levels=c("1","0"))
-CHILD$covid_change_c_1g.factor = factor(CHILD$covid_change_c_1g,levels=c("1","0"))
-CHILD$covid_change_c_4.factor = factor(CHILD$covid_change_c_4,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_5.factor = factor(CHILD$covid_change_c_5,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_6.factor = factor(CHILD$covid_change_c_6,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_7.factor = factor(CHILD$covid_change_c_7,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_8a.factor = factor(CHILD$covid_change_c_8a,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_8b.factor = factor(CHILD$covid_change_c_8b,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_9a.factor = factor(CHILD$covid_change_c_9a,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_9b.factor = factor(CHILD$covid_change_c_9b,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_10.factor = factor(CHILD$covid_change_c_10,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_11.factor = factor(CHILD$covid_change_c_11,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_12.factor = factor(CHILD$covid_change_c_12,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_13.factor = factor(CHILD$covid_change_c_13,levels=c("1","0"))
-CHILD$covid_change_c_14.factor = factor(CHILD$covid_change_c_14,levels=c("1","2","3","4","5"))
+CHILD$School_building_closed.TC.factor = factor(CHILD$School_building_closed.TC,levels=c("1","0"))
+CHILD$Classes_in_person.TC.factor = factor(CHILD$Classes_in_person.TC,levels=c("1","0"))
+CHILD$Classes_in_session.TC.factor = factor(CHILD$Classes_in_session.TC,levels=c("1","0"))
+CHILD$Classes_online.TC.factor = factor(CHILD$Classes_online.TC,levels=c("1","0"))
+CHILD$Access_to_internet.TC.factor = factor(CHILD$Access_to_internet.TC,levels=c("1","0"))
+CHILD$Assignments.TC.factor = factor(CHILD$Assignments.TC,levels=c("1","0"))
+CHILD$Meals_from_school.TC.factor = factor(CHILD$Meals_from_school.TC,levels=c("1","0"))
+CHILD$Time_going_oustide.TC.factor = factor(CHILD$Time_going_oustide.TC,levels=c("1","2","3","4","5"))
+CHILD$Stress_of_restrictions.TC.factor = factor(CHILD$Stress_of_restrictions.TC,levels=c("1","2","3","4","5"))
+CHILD$Contacts_outside_change.TC.factor = factor(CHILD$Contacts_outside_change.TC,levels=c("1","2","3","4","5"))
+CHILD$Diff_following_contact_rules.TC.factor = factor(CHILD$Diff_following_contact_rules.TC,levels=c("1","2","3","4","5"))
+CHILD$Quality_relations_family_change.TC.factor = factor(CHILD$Quality_relations_family_change.TC,levels=c("1","2","3","4","5"))
+CHILD$Stress_relations_family_change.TC.factor = factor(CHILD$Stress_relations_family_change.TC,levels=c("1","2","3","4","5"))
+CHILD$Quality_relations_friends_change.TC.factor = factor(CHILD$Quality_relations_friends_change.TC,levels=c("1","2","3","4","5"))
+CHILD$Stress_relations_friends_change.TC.factor = factor(CHILD$Stress_relations_friends_change.TC,levels=c("1","2","3","4","5"))
+CHILD$Cancelling_events_difficulty.TC.factor = factor(CHILD$Cancelling_events_difficulty.TC,levels=c("1","2","3","4","5"))
+CHILD$Family_financial_problems.TC.factor = factor(CHILD$Family_financial_problems.TC,levels=c("1","2","3","4","5"))
+CHILD$Worry_living_stability.TC.factor = factor(CHILD$Worry_living_stability.TC,levels=c("1","2","3","4","5"))
+CHILD$Worry_no_food.TC.factor = factor(CHILD$Worry_no_food.TC,levels=c("1","0"))
+CHILD$Hope_crisis_end.TC.factor = factor(CHILD$Hope_crisis_end.TC,levels=c("1","2","3","4","5"))
 CHILD$covid_changes_complete.factor = factor(CHILD$covid_changes_complete,levels=c("0","1","2"))
-CHILD$covid_behav_c_1.factor = factor(CHILD$covid_behav_c_1,levels=c("1","2","3","4"))
-CHILD$covid_behav_c_2.factor = factor(CHILD$covid_behav_c_2,levels=c("1","2","3","4","5"))
-CHILD$covid_behav_c_3.factor = factor(CHILD$covid_behav_c_3,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_1.factor = factor(CHILD$covid_emotion_c_1,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_2.factor = factor(CHILD$covid_emotion_c_2,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_3.factor = factor(CHILD$covid_emotion_c_3,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_4.factor = factor(CHILD$covid_emotion_c_4,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_5.factor = factor(CHILD$covid_emotion_c_5,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_6.factor = factor(CHILD$covid_emotion_c_6,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_7.factor = factor(CHILD$covid_emotion_c_7,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_8.factor = factor(CHILD$covid_emotion_c_8,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_9.factor = factor(CHILD$covid_emotion_c_9,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_10.factor = factor(CHILD$covid_emotion_c_10,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_11.factor = factor(CHILD$covid_emotion_c_11,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_12.factor = factor(CHILD$covid_emotion_c_12,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_13.factor = factor(CHILD$covid_emotion_c_13,levels=c("1","2","3","4","5"))
+CHILD$Hours_sleep_3months.TC.factor = factor(CHILD$Hours_sleep_3months.TC,levels=c("1","2","3","4"))
+CHILD$Days_exercise_3months.TC.factor = factor(CHILD$Days_exercise_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Days_outdoors_3months.TC.factor = factor(CHILD$Days_outdoors_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Worried_3months.TC.factor = factor(CHILD$Worried_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Happy_sad_3months.TC.factor = factor(CHILD$Happy_sad_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Anhedonia_3months.TC.factor = factor(CHILD$Anhedonia_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Relaxed_anxious_3months.TC.factor = factor(CHILD$Relaxed_anxious_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Fidgety_restless_3months.TC.factor = factor(CHILD$Fidgety_restless_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Fatigued_tired_3months.TC.factor = factor(CHILD$Fatigued_tired_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Concentration_3months.TC.factor = factor(CHILD$Concentration_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Irritability_3months.TC.factor = factor(CHILD$Irritability_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Loneliness_3months.TC.factor = factor(CHILD$Loneliness_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Neg_thoughts_3monthss.TC.factor = factor(CHILD$Neg_thoughts_3monthss.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_watching_TV_3months.TC.factor = factor(CHILD$Time_watching_TV_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_social_media_3months.TC.factor = factor(CHILD$Time_social_media_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_video_games_3months.TC.factor = factor(CHILD$Time_video_games_3months.TC,levels=c("1","2","3","4","5"))
 CHILD$covid_substance_c_1.factor = factor(CHILD$covid_substance_c_1,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_2.factor = factor(CHILD$covid_substance_c_2,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_3.factor = factor(CHILD$covid_substance_c_3,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_4.factor = factor(CHILD$covid_substance_c_4,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_5.factor = factor(CHILD$covid_substance_c_5,levels=c("1","2","3","4","5"))
-CHILD$covid_exposure_c_6a.factor = factor(CHILD$covid_exposure_c_6a,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_5b.factor = factor(CHILD$covid_substance_c_5b,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_6.factor = factor(CHILD$covid_substance_c_6,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_7.factor = factor(CHILD$covid_substance_c_7,levels=c("1","2","3","4","5"))
+CHILD$Vaping_nicotine_3months.TC.factor = factor(CHILD$Vaping_nicotine_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Cigs_tobacco_3months.TC.factor = factor(CHILD$Cigs_tobacco_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Cannabis_3months.TC.factor = factor(CHILD$Cannabis_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Opiates_heropin_narcs_3months.TC.factor = factor(CHILD$Opiates_heropin_narcs_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$MDMA_molly_ecstasy_3months.TCfactor = factor(CHILD$MDMA_molly_ecstasy_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Halluc_3months.TC.factor = factor(CHILD$Halluc_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Other_drugs_3months.TC.factor = factor(CHILD$Other_drugs_3months.TC,levels=c("1","2","3","4","5"))
+CHILD$Sleep_meds_seds_hypnot_3months.TC.factor = factor(CHILD$Sleep_meds_seds_hypnot_3months.TC,levels=c("1","2","3","4","5"))
 CHILD$covid_emotions_behaviors_3_months_complete.factor = factor(CHILD$covid_emotions_behaviors_3_months_complete,levels=c("0","1","2"))
-CHILD$covid_behav_c_4.factor = factor(CHILD$covid_behav_c_4,levels=c("1","2","3","4"))
-CHILD$covid_behav_c_5.factor = factor(CHILD$covid_behav_c_5,levels=c("1","2","3","4","5"))
-CHILD$covid_behav_c_6.factor = factor(CHILD$covid_behav_c_6,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_14.factor = factor(CHILD$covid_emotion_c_14,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_15.factor = factor(CHILD$covid_emotion_c_15,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_16.factor = factor(CHILD$covid_emotion_c_16,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_17.factor = factor(CHILD$covid_emotion_c_17,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_18.factor = factor(CHILD$covid_emotion_c_18,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_19.factor = factor(CHILD$covid_emotion_c_19,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_20.factor = factor(CHILD$covid_emotion_c_20,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_21.factor = factor(CHILD$covid_emotion_c_21,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_22.factor = factor(CHILD$covid_emotion_c_22,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_23.factor = factor(CHILD$covid_emotion_c_23,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_24.factor = factor(CHILD$covid_emotion_c_24,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_25.factor = factor(CHILD$covid_emotion_c_25,levels=c("1","2","3","4","5"))
-CHILD$covid_emotion_c_13_7011eb.factor = factor(CHILD$covid_emotion_c_13_7011eb,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_9.factor = factor(CHILD$covid_substance_c_9,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_10.factor = factor(CHILD$covid_substance_c_10,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_11.factor = factor(CHILD$covid_substance_c_11,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_13.factor = factor(CHILD$covid_substance_c_13,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_14.factor = factor(CHILD$covid_substance_c_14,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_14a.factor = factor(CHILD$covid_substance_c_14a,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_14b.factor = factor(CHILD$covid_substance_c_14b,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_15.factor = factor(CHILD$covid_substance_c_15,levels=c("1","2","3","4","5"))
-CHILD$covid_substance_c_8.factor = factor(CHILD$covid_substance_c_8,levels=c("1","2","3","4","5"))
-CHILD$covid_change_c_15___1.factor = factor(CHILD$covid_change_c_15___1,levels=c("0","1"))
-CHILD$covid_change_c_15___2.factor = factor(CHILD$covid_change_c_15___2,levels=c("0","1"))
-CHILD$covid_change_c_15___3.factor = factor(CHILD$covid_change_c_15___3,levels=c("0","1"))
-CHILD$covid_change_c_15___4.factor = factor(CHILD$covid_change_c_15___4,levels=c("0","1"))
-CHILD$covid_change_c_15___5.factor = factor(CHILD$covid_change_c_15___5,levels=c("0","1"))
-CHILD$covid_change_c_15___6.factor = factor(CHILD$covid_change_c_15___6,levels=c("0","1"))
-CHILD$covid_change_c_15___7.factor = factor(CHILD$covid_change_c_15___7,levels=c("0","1"))
-CHILD$covid_change_c_15___8.factor = factor(CHILD$covid_change_c_15___8,levels=c("0","1"))
-CHILD$covid_change_c_15___9.factor = factor(CHILD$covid_change_c_15___9,levels=c("0","1"))
-CHILD$covid_change_c_15___10.factor = factor(CHILD$covid_change_c_15___10,levels=c("0","1"))
-CHILD$covid_change_c_15___11.factor = factor(CHILD$covid_change_c_15___11,levels=c("0","1"))
-CHILD$covid_change_c_15___12.factor = factor(CHILD$covid_change_c_15___12,levels=c("0","1"))
-CHILD$covid_change_c_15___13.factor = factor(CHILD$covid_change_c_15___13,levels=c("0","1"))
+CHILD$Hours_sleep_2weeks.TC.factor = factor(CHILD$Hours_sleep_2weeks.TC,levels=c("1","2","3","4"))
+CHILD$Days_exercise_2weeks.TC.factor = factor(CHILD$Days_exercise_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Days_outdoors_2weeks.TC.factor = factor(CHILD$Days_outdoors_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Worried_2weeks.TC.factor = factor(CHILD$Worried_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Happy_sad_2weeks.TC.factor = factor(CHILD$Happy_sad_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Anhedonia_2weeks.TC.factor = factor(CHILD$Anhedonia_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Relaxed_anxious_2weeks.TC.factor = factor(CHILD$Relaxed_anxious_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Fidgety_restless_2weeks.TC.factor = factor(CHILD$Fidgety_restless_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Fatigued_tired_2weeks.TC.factor = factor(CHILD$Fatigued_tired_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Concentration_2weeks.TC.factor = factor(CHILD$Concentration_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Irritability_2weeks.TC.factor = factor(CHILD$Irritability_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Loneliness_2weeks.TC.factor = factor(CHILD$Loneliness_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Neg_thoughts_2weeks.TC.factor = factor(CHILD$Neg_thoughts_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_watching_TV_2weeks.TC.factor = factor(CHILD$Time_watching_TV_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_social_media_2weeks.TC.factor = factor(CHILD$Time_social_media_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Time_video_games_2weeks.TC.factor = factor(CHILD$Time_video_games_2weeks.TClevels=c("1","2","3","4","5"))
+CHILD$Alcohol_2weeks.TC.factor = factor(CHILD$Alcohol_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Vaping_nicotine_2weeks.TC.factor = factor(CHILD$Vaping_nicotine_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Cigs_tobacco_2weeks.TC.factor = factor(CHILD$Cigs_tobacco_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Cannabis_2weeks.TC.factor = factor(CHILD$Cannabis_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Opiates_heropin_narcs_2weeks.TC.factor = factor(CHILD$Opiates_heropin_narcs_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$MDMA_molly_ecstasy_2weeks.TC.factor = factor(CHILD$MDMA_molly_ecstasy_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Halluc_2weeks.TC.factor = factor(CHILD$Halluc_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Other_drugs_2weeks.TC.factor = factor(CHILD$Other_drugs_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Sleep_meds_seds_hypnot_2weeks.TC.factor = factor(CHILD$Sleep_meds_seds_hypnot_2weeks.TC,levels=c("1","2","3","4","5"))
+CHILD$Resource_room.TC.factor = factor(CHILD$Resource_room.TC,levels=c("0","1"))
+CHILD$Tutoring.TC.factor = factor(CHILD$Tutoring.TC,levels=c("0","1"))
+CHILD$Mentoring_programs.TC.factor = factor(CHILD$Mentoring_programs.TC,levels=c("0","1"))
+CHILD$After_school_programs.TC.factor = factor(CHILD$After_school_programs.TC,levels=c("0","1"))
+CHILD$Volunteer_programs.TC.factor = factor(CHILD$Volunteer_programs.TC,levels=c("0","1"))
+CHILD$Psychotherapy.TC.factor = factor(CHILD$Psychotherapy.TC,levels=c("0","1"))
+CHILD$Psychiatric_care.TC.factor = factor(CHILD$Psychiatric_care.TC,levels=c("0","1"))
+CHILD$Occup_therapy.TC.factor = factor(CHILD$Occup_therapy.TC,levels=c("0","1"))
+CHILD$Phys_therapy.TC.factor = factor(CHILD$Phys_therapy.TC,levels=c("0","1"))
+CHILD$peech_therapy.TC.factor = factor(CHILD$peech_therapy.TC,levels=c("0","1"))
+CHILD$Sport_activities.TC.factor = factor(CHILD$Sport_activities.TC,levels=c("0","1"))
+CHILD$Medical_care.TC.factor = factor(CHILD$Medical_care.TC,levels=c("0","1"))
+CHILD$Other_support_specify.TC.factor = factor(CHILD$Other_support_specify.TC,levels=c("0","1"))
 CHILD$covid_emotions_behaviors_past_2_weeks_complete.factor = factor(CHILD$covid_emotions_behaviors_past_2_weeks_complete,levels=c("0","1","2"))
 
 #levels(CHILD$redcap_event_name.factor)=c("COVID T1","COVID T2","COVID T3")
@@ -396,167 +566,167 @@ levels(CHILD$covid_background_gender.factor)=c("Male","Female","Non-binary/ Othe
 levels(CHILD$covid_background_1.factor)=c("Not in school","Elementary school","Junior High or Middle School","High school","College/Vocational")
 levels(CHILD$covid_background_2.factor)=c("Large city","Suburbs of a large city","Small city","Town or village","Rural area")
 levels(CHILD$covid_background_4___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___4.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___5.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___6.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___7.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___8.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___9.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___10.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___11.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_4___12.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_adol_report_1.factor)=c("Excellent","Very Good","Good","Fair","Poor")
-levels(CHILD$covid_background_health___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___4.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___5.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___6.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___7.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___8.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___9.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_biofather.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_stepmother.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_stepfather.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_adopt_parent.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_sibling.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_other_relat.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_nonrelat.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_roommate.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_sig_other.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_other.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Home_alone.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Physical_health_rating.TC.factor)=c("Excellent","Very Good","Good","Fair","Poor")
+levels(CHILD$Seasonal_allergies.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Asthma_lung_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Heart_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Kidney_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Immune_disorder.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Diabetes.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Recent_infection.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Hypertension.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$High_cholesterol.TC.factor)=c("Unchecked","Checked")
 levels(CHILD$covid_background_health___10.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___11.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___12.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___13.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___14.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___15.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___16.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___17.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___18.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_background_health___19.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_adol_report_5.factor)=c("Excellent","Very Good","Good","Fair","Poor")
+levels(CHILD$Arthritis.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Headaches.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Epilepsy_seizures.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Stomach_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Skin_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Psych_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Substance_problems.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$TBI.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Serious_accident.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Mental_health_rating.TC.factor)=c("Excellent","Very Good","Good","Fair","Poor")
 levels(CHILD$background_complete.factor)=c("Incomplete","Unverified","Complete")
-levels(CHILD$covid_exposure_c_1___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_1___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_1___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_1___4.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_2.factor)=c("Yes, I have/had a positive test","Yes, I have/had a medical diagnosis, but no test","Yes, I have/had some possible symptoms, but no diagnosis by a doctor","No")
-levels(CHILD$covid_exposure_c_3a___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3a___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3b___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3b___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3c___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3c___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3d___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3d___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3e___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3e___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3f___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3f___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3h___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_3h___0.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_4___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_4___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_4___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___4.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___5.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___6.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___7.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_6___8.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_exposure_c_7.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_exposure_c_8.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_exposure_c_9.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_exposure_c_10.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_exposure_c_11.factor)=c("Never","Rarely","Occasionally","Often","Most of the time")
-levels(CHILD$covid_exposure_c_12.factor)=c("None","Only a few","Some")
+levels(CHILD$Exposed_dx_pos_test.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Exposed_dx_no_test.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Exposed_symptoms_no_test.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Exposed_no.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_dx.TC.factor)=c("Yes, I have/had a positive test","Yes, I have/had a medical diagnosis, but no test","Yes, I have/had some possible symptoms, but no diagnosis by a doctor","No")
+levels(CHILD$Covid_child_fever.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_fever.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_cough.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_cough.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_short_breath.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_short_breath.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_sore_throat.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_sore_throat.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_fatigue.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_fatigue.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_loss_taste_smell.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_loss_taste_smell.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_other_symptom.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Covid_child_no_other_symptom.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Mem_household_covid_dx.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Non_mem_household_covid_dx.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$No_fam_covid_dx.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_ill.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_hospitalized.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_selfquar_symp.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_selfquar_nosymp.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_lost_job.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_less_money.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Fam_member_pass_away.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$No_fam_member_changes.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Worry_self_infected.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Worry_fam_infected.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Self_phys_health_influence.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Self_mental_health_influence.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Read_talk_virus.TC.factor)=c("Never","Rarely","Occasionally","Often","Most of the time")
+levels(CHILD$Covid_positive_changes.TC.factor)=c("None","Only a few","Some")
 levels(CHILD$covid_exposure_complete.factor)=c("Incomplete","Unverified","Complete")
-levels(CHILD$covid_change_c_1a.factor)=c("Yes","No")
-levels(CHILD$covid_change_1c.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_1b.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_1d.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_1e.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_1f.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_1g.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_4.factor)=c("Not at all","1-2 days per week","A few days per week","Several days per week","Everyday")
-levels(CHILD$covid_change_c_5.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_6.factor)=c("A lot less","A little less","About the same","A little more","A lot more")
-levels(CHILD$covid_change_c_7.factor)=c("None","A little","Moderate","A lot","A great amount")
-levels(CHILD$covid_change_c_8a.factor)=c("A lot worse","A little worse","About the same","A little better","A lot better")
-levels(CHILD$covid_change_c_8b.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_9a.factor)=c("A lot worse","A little worse","About the same","A little better","A lot better")
-levels(CHILD$covid_change_c_9b.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_10.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_11.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_12.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
-levels(CHILD$covid_change_c_13.factor)=c("Yes","No")
-levels(CHILD$covid_change_c_14.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$School_building_closed.TC.factor)=c("Yes","No")
+levels(CHILD$Classes_in_person.TC.factor)=c("Yes","No")
+levels(CHILD$Classes_in_session.TC.factor)=c("Yes","No")
+levels(CHILD$Classes_online.TC.factor)=c("Yes","No")
+levels(CHILD$Access_to_internet.TC.factor)=c("Yes","No")
+levels(CHILD$Assignments.TC.factor)=c("Yes","No")
+levels(CHILD$Meals_from_school.TC.factor)=c("Yes","No")
+levels(CHILD$Time_going_oustide.TC.factor)=c("Not at all","1-2 days per week","A few days per week","Several days per week","Everyday")
+levels(CHILD$Stress_of_restrictions.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Contacts_outside_change.TC.factor)=c("A lot less","A little less","About the same","A little more","A lot more")
+levels(CHILD$Diff_following_contact_rules.TC.factor)=c("None","A little","Moderate","A lot","A great amount")
+levels(CHILD$Quality_relations_family_change.TC.factor)=c("A lot worse","A little worse","About the same","A little better","A lot better")
+levels(CHILD$Stress_relations_family_change.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Quality_relations_friends_change.TC.factor)=c("A lot worse","A little worse","About the same","A little better","A lot better")
+levels(CHILD$Stress_relations_friends_change.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Cancelling_events_difficulty.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Family_financial_problems.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Worry_living_stability.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
+levels(CHILD$Worry_no_food.TC.factor)=c("Yes","No")
+levels(CHILD$Hope_crisis_end.TC.factor)=c("Not at all","Slightly","Moderately","Very","Extremely")
 levels(CHILD$covid_changes_complete.factor)=c("Incomplete","Unverified","Complete")
-levels(CHILD$covid_behav_c_1.factor)=c("less than 6 hours","6-8 hours","8-10 hours","more than 10 hours")
-levels(CHILD$covid_behav_c_2.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
-levels(CHILD$covid_behav_c_3.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
-levels(CHILD$covid_emotion_c_1.factor)=c("Not worried at all","Slightly worried","Moderately worried","Very worried","Extremely worried")
-levels(CHILD$covid_emotion_c_2.factor)=c("Very sad/depressed/unhappy","Moderately sad/depressed/unhappy","Neutral","Moderately happy/cheerful","Very happy/cheerful")
-levels(CHILD$covid_emotion_c_3.factor)=c("Not at all","Slightly","Moderately","Very much","A lot")
-levels(CHILD$covid_emotion_c_4.factor)=c("Very relaxed/calm","Moderately relaxed/calm","Neutral","Moderately nervous/anxious","Very nervous/anxious")
-levels(CHILD$covid_emotion_c_5.factor)=c("Not fidgety/restless at all","Slightly fidgety/fatigued","Moderately fidgety/restless","Very fidgety/restless","Extremely fidgety/restless")
-levels(CHILD$covid_emotion_c_6.factor)=c("Not fatigued or tired at all","Slightly fatigued or tired","Moderately fatigued or tired","Very fatigued or tired","Extremely fatigued or tired")
-levels(CHILD$covid_emotion_c_7.factor)=c("Very focused/attentive","Moderately focused/attentive","Neutral","Moderately unfocused/distracted","Very unfocused/distracted")
-levels(CHILD$covid_emotion_c_8.factor)=c("Not irritable or easily angered at all","Slightly irritable or easy angered","Moderately irritable or easily angered","Very irritable or easily angered","Extremely irritable or easily angered")
-levels(CHILD$covid_emotion_c_9.factor)=c("Not lonely at all","Slightly lonely","Moderately lonely","Very lonely","Extremely lonely")
-levels(CHILD$covid_emotion_c_10.factor)=c("Not at all","Rarely","Occasionally","Often","A lot of the time")
-levels(CHILD$covid_emotion_c_11.factor)=c("No TV or digital media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_emotion_c_12.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_emotion_c_13.factor)=c("No video games","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_substance_c_1.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_2.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_3.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_4.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_5.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_exposure_c_6a.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_5b.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_6.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_7.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Hours_sleep_3months.TC.factor)=c("less than 6 hours","6-8 hours","8-10 hours","more than 10 hours")
+levels(CHILD$Days_exercise_3months.TC.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
+levels(CHILD$Days_outdoors_3months.TC.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
+levels(CHILD$Worried_3months.TC.factor)=c("Not worried at all","Slightly worried","Moderately worried","Very worried","Extremely worried")
+levels(CHILD$Happy_sad_3months.TC)=c("Very sad/depressed/unhappy","Moderately sad/depressed/unhappy","Neutral","Moderately happy/cheerful","Very happy/cheerful")
+levels(CHILD$Anhedonia_3months.TC.factor)=c("Not at all","Slightly","Moderately","Very much","A lot")
+levels(CHILD$Relaxed_anxious_3months.TC.factor)=c("Very relaxed/calm","Moderately relaxed/calm","Neutral","Moderately nervous/anxious","Very nervous/anxious")
+levels(CHILD$Fidgety_restless_3months.TC.factor)=c("Not fidgety/restless at all","Slightly fidgety/fatigued","Moderately fidgety/restless","Very fidgety/restless","Extremely fidgety/restless")
+levels(CHILD$Fatigued_tired_3months.TC.factor)=c("Not fatigued or tired at all","Slightly fatigued or tired","Moderately fatigued or tired","Very fatigued or tired","Extremely fatigued or tired")
+levels(CHILD$Concentration_3months.TC.factor)=c("Very focused/attentive","Moderately focused/attentive","Neutral","Moderately unfocused/distracted","Very unfocused/distracted")
+levels(CHILD$Irritability_3months.TC.factor)=c("Not irritable or easily angered at all","Slightly irritable or easy angered","Moderately irritable or easily angered","Very irritable or easily angered","Extremely irritable or easily angered")
+levels(CHILD$Loneliness_3months.TC.factor)=c("Not lonely at all","Slightly lonely","Moderately lonely","Very lonely","Extremely lonely")
+levels(CHILD$Neg_thoughts_3monthss.TC.factor)=c("Not at all","Rarely","Occasionally","Often","A lot of the time")
+levels(CHILD$Time_watching_TV_3months.TC.factor)=c("No TV or digital media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Time_social_media_3months.TC.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Time_video_games_3months.TC.factor)=c("No video games","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Alcohol_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Vaping_nicotine_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Cigs_tobacco_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Cannabis_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Opiates_heropin_narcs_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$MDMA_molly_ecstasy_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Halluc_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Other_drugs_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Sleep_meds_seds_hypnot_3months.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
 levels(CHILD$covid_emotions_behaviors_3_months_complete.factor)=c("Incomplete","Unverified","Complete")
-levels(CHILD$covid_behav_c_4.factor)=c("less than 6 hours","6-8 hours","8-10 hours","more than 10 hours")
-levels(CHILD$covid_behav_c_5.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
-levels(CHILD$covid_behav_c_6.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
-levels(CHILD$covid_emotion_c_14.factor)=c("Not worried at all","Slightly worried","Moderately worried","Very worried","Extremely worried")
-levels(CHILD$covid_emotion_c_15.factor)=c("Very sad/depressed/unhappy","Moderately sad/depressed/unhappy","Neutral","Moderately happy/cheerful","Very happy/cheerful")
-levels(CHILD$covid_emotion_c_16.factor)=c("Not at all","Slightly","Moderately","Very much","A lot")
-levels(CHILD$covid_emotion_c_17.factor)=c("Very relaxed/calm","Moderately relaxed/calm","Neutral","Moderately nervous/anxious","Very nervous/anxious")
-levels(CHILD$covid_emotion_c_18.factor)=c("Not fidgety/restless at all","Slightly fidgety/fatigued","Moderately fidgety/restless","Very fidgety/restless","Extremely fidgety/restless")
-levels(CHILD$covid_emotion_c_19.factor)=c("Not fatigued or tired at all","Slightly fatigued or tired","Moderately fatigued or tired","Very fatigued or tired","Extremely fatigued or tired")
-levels(CHILD$covid_emotion_c_20.factor)=c("Very focused/attentive","Moderately focused/attentive","Neutral","Moderately unfocused/distracted","Very unfocused/distracted")
-levels(CHILD$covid_emotion_c_21.factor)=c("Not irritable or easily angered at all","Slightly irritable or easy angered","Moderately irritable or easily angered","Very irritable or easily angered","Extremely irritable or easily angered")
-levels(CHILD$covid_emotion_c_22.factor)=c("Not lonely at all","Slightly lonely","Moderately lonely","Very lonely","Extremely lonely")
-levels(CHILD$covid_emotion_c_23.factor)=c("Not at all","Rarely","Occasionally","Often","A lot of the time")
-levels(CHILD$covid_emotion_c_24.factor)=c("No TV or digital media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_emotion_c_25.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_emotion_c_13_7011eb.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
-levels(CHILD$covid_substance_c_9.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_10.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_11.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_13.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_14.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_14a.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_14b.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_15.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_substance_c_8.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
-levels(CHILD$covid_change_c_15___1.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___2.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___3.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___4.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___5.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___6.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___7.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___8.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___9.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___10.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___11.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___12.factor)=c("Unchecked","Checked")
-levels(CHILD$covid_change_c_15___13.factor)=c("Unchecked","Checked")
+levels(CHILD$Hours_sleep_2weeks.TC.factor)=c("less than 6 hours","6-8 hours","8-10 hours","more than 10 hours")
+levels(CHILD$Days_exercise_2weeks.TC.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
+levels(CHILD$Days_outdoors_2weeks.TC.factor)=c("None","1-2 days","3-4 days","5-6 days","Daily")
+levels(CHILD$Worried_2weeks.TC.factor)=c("Not worried at all","Slightly worried","Moderately worried","Very worried","Extremely worried")
+levels(CHILD$Happy_sad_2weeks.TC.factor)=c("Very sad/depressed/unhappy","Moderately sad/depressed/unhappy","Neutral","Moderately happy/cheerful","Very happy/cheerful")
+levels(CHILD$Anhedonia_2weeks.TC.factor)=c("Not at all","Slightly","Moderately","Very much","A lot")
+levels(CHILD$Relaxed_anxious_2weeks.TC.factor)=c("Very relaxed/calm","Moderately relaxed/calm","Neutral","Moderately nervous/anxious","Very nervous/anxious")
+levels(CHILD$Fidgety_restless_2weeks.TC.factor)=c("Not fidgety/restless at all","Slightly fidgety/fatigued","Moderately fidgety/restless","Very fidgety/restless","Extremely fidgety/restless")
+levels(CHILD$Fatigued_tired_2weeks.TC.factor)=c("Not fatigued or tired at all","Slightly fatigued or tired","Moderately fatigued or tired","Very fatigued or tired","Extremely fatigued or tired")
+levels(CHILD$Concentration_2weeks.TC.factor)=c("Very focused/attentive","Moderately focused/attentive","Neutral","Moderately unfocused/distracted","Very unfocused/distracted")
+levels(CHILD$Irritability_2weeks.TC.factor)=c("Not irritable or easily angered at all","Slightly irritable or easy angered","Moderately irritable or easily angered","Very irritable or easily angered","Extremely irritable or easily angered")
+levels(CHILD$Loneliness_2weeks.TC.factor)=c("Not lonely at all","Slightly lonely","Moderately lonely","Very lonely","Extremely lonely")
+levels(CHILD$Neg_thoughts_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","A lot of the time")
+levels(CHILD$Time_watching_TV_2weeks.TC.factor)=c("No TV or digital media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Time_social_media_2weeks.TC.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Time_video_games_2weeks.TC.factor)=c("No social media","Under 1 hour","1-3 hours","4-6 hours","More than 6 hours")
+levels(CHILD$Alcohol_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Vaping_nicotine_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Cigs_tobacco_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Cannabis_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Opiates_heropin_narcs_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$MDMA_molly_ecstasy_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Halluc_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Other_drugs_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Sleep_meds_seds_hypnot_2weeks.TC.factor)=c("Not at all","Rarely","Occasionally","Often","Regularly")
+levels(CHILD$Resource_room.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Tutoring.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Mentoring_programs.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$After_school_programs.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Volunteer_programs.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Psychotherapy.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Psychiatric_care.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Occup_therapy.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Phys_therapy.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Speech_therapy.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Sport_activities.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Medical_care.TC.factor)=c("Unchecked","Checked")
+levels(CHILD$Other_support_specify.TC.factor)=c("Unchecked","Checked")
 levels(CHILD$covid_emotions_behaviors_past_2_weeks_complete.factor)=c("Incomplete","Unverified","Complete")
 
 
 
 
-
+##video game section
 
 
 
